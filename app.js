@@ -6,8 +6,8 @@
 var express = require('express');
 var app = module.exports = express.createServer();
 
-var mongoose = require('mongoose');
-var db = mongoose.connect('mongodb://localhost/foo');
+//var mongoose = require('mongoose');
+//var db = mongoose.connect('mongodb://localhost/foo');
 
 // Configuration
 
@@ -32,7 +32,8 @@ app.configure('production', function(){
 
 app.get('/', function(req, res){
   res.render('index', {
-    title: 'Express'
+    title: 'Express',
+    bar: 'Bar'
   });
 });
 

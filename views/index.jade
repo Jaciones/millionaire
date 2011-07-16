@@ -1,2 +1,19 @@
-h1= title
-p Welcome to Jason's #{title}
+h1 Jade - node template engine
+div(data-role = "page", id = "foo")
+   div(data-role = "header")
+      h1 Foo
+   div(data-role = "content")
+      p I 'm first in the source order so I'm shown as the page.
+      p View internal page called
+         a(href = "#bar") bar
+   div(data-role = "footer")
+      h4 Page Footer
+div(data-role = "page", id = "bar")
+   div(data-role = "header")
+      h1 Bar
+   div(data-role = "content")
+      p I'm first in the source order so I'm shown as the page.
+      p Test
+         a(href="#foo") Back to foo
+   div(data-role = "footer")
+      h4 Page Footer
