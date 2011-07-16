@@ -4,8 +4,10 @@
  */
 
 var express = require('express');
-
 var app = module.exports = express.createServer();
+
+var mongoose = require('mongoose');
+var db = mongoose.connect('mongodb://localhost/foo');
 
 // Configuration
 
@@ -34,5 +36,11 @@ app.get('/', function(req, res){
   });
 });
 
-app.listen(3000);
+app.get('/user', function(req, res){
+  res.render('user', {
+    title: 'Express'
+  });
+});
+
+app.listen(process.env.C9_PORT);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
