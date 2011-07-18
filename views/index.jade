@@ -4,7 +4,14 @@ div(data-role = "page", id = "foo")
       h1 Foo
    div(data-role = "content")
       p I 'm first in the source order so I'm shown as the page.
-      p View internal page called
+      center
+         div
+            a(href="index.html",data-role="button",data-theme="b",data-icon="star", data-inline="true", style="width: 200px;")
+               span Start
+         div
+            a(href="index.html",data-role="button",data-icon="star", data-inline="true")
+               span Info
+   p View internal page called
          a(href = "#bar") bar
    div(data-role = "footer")
       h4 Page Footer
@@ -12,8 +19,11 @@ div(data-role = "page", id = "bar")
    div(data-role = "header")
       h1 Bar
    div(data-role = "content")
+      ul(data-role="listview")
+         li Alpha
+         li Beta
+         li Omega
       p I'm first in the source order so I'm shown as the page.
-      p Test
-         a(href="#foo") Back to foo
+      a(href="#foo") Back to foo
    div(data-role = "footer")
       h4 Page Footer
