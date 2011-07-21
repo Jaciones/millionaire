@@ -6,9 +6,6 @@
 var express = require('express');
 app = module.exports = express.createServer();
 
-var mongoose = require('mongoose');
-var db = mongoose.connect('mongodb://localhost/foo');
-
 // Configuration
 
 app.configure(function() {
