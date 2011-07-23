@@ -1,4 +1,5 @@
 var db = require('../models/db').DB;
+var LocalUtils = require('../helpers/utils');
 
 var config = {
    "secrets": {
@@ -11,23 +12,35 @@ var config = {
 var Foursquare = require("node-foursquare")(config);
 
 app.get('/', function(req, res) {
+   
+   if (LocalUtils.getCookie('user_id', req) && LocalUtils.getCookie('access_token', req)) {
+      redirectHome(LocalUtils.getCookie('user_id', req), LocalUtils.getCookie('access_token', req), res);
+      return;
+   }
+   
    res.render('index', {
       title: 'Express',
-      bar: 'Bar'
+      bar: 'Bar',
+      user_id: LocalUtils.getCookie('user_id', req)
    });
 });
 
 app.get('/home', function(req, res) {
-
-   var callback = function() {
-         res.render('index', {
+   var user_id = LocalUtils.getCookie('user_id', req);
+   var access_token = LocalUtils.getCookie('access_token', req);
+   
+   var callback = function(err, data) {
+      console.log("Checkins", data);
+      var venues = data.venues.items;
+      console.log("Venues", venues);
+      
+         res.render('home', {
             title: 'Express',
-            bar: 'Bar'
+            venues: venues
          });
-       }
-       
-//   var checkins = Foursquare.getCheckins([userId], [params], accessToken, callback);
+       };
 
+    var checkins = Foursquare.Users.getVenueHistory('self', null, access_token, callback);
 });
 
 app.get('/login', function(req, res) {
@@ -48,53 +61,57 @@ app.get('/callback', function(req, res) {
       }
       else {
          login(accessToken, res);
-
-         res.writeHead(303, {
-            "location": "/home"
-         });
-         res.end();
       }
    });
 });
 
+function redirectHome(user_id, accessToken, res) {
+   res.cookie('user_id', user_id, { httpOnly: true});
+   res.cookie('access_token', accessToken, { httpOnly: true});
+   res.writeHead(303, {
+      "location": "/home"
+   });
+   res.end();
+}
+
 function login(accessToken, res) {
    Foursquare.Users.getUser('self', accessToken, function(err_foursquare, foursquare_user) {
       if (err_foursquare) {
-         res.send("An error was thrown in getUser: " + err_foursquare.message);
-      }else {
-         var foursquare_id = foursquare_user.user.id;
-         console.log("here");
-         console.log(foursquare_id);
-         console.log(foursquare_user);
-         console.log(db.User.findOne({ 'foursquare_id' : 'sadfdfsdffsadfdsa'}));
-
-         db.User.findOne({ 'foursquare_id': foursquare_id }, function(err, user) {
-            if (err) { 
-               console.log("err here");
-               res.send("An error was thrown in logn: " + err.message);
-               res.writeHead(303, {
-                  "location": "/home"
-               });
-               res.end();
-               return; 
+         LocalUtils.throwError(err_foursquare);
+         return;
+      }
+      else {
+         foursquare_user = foursquare_user.user; // Get User
+         var foursquare_id = foursquare_user.id;
+         console.log("Foursquare User", foursquare_user);
+         db.User.findOne({
+            'foursquare_id': foursquare_id
+         }, function(err, user) {
+            if (err) {
+               LocalUtils.throwError(err);
+               return;
             }
-            console.log("Got user");
-            console.log(user);
-         
+            console.log("Found user");
             if (!user) {
-               var newUser = new User();
-               newUser.foursquare_id = user.id;
-               newUser.full_name = user.first_name + user.last_name;
-               newUser.first_name = user.first_name;
-               newUser.last_name = user.last_name;
-               newUser.access_token = access_token;
-               
-               newUser.save(function(err2) {
-                  console.log("Failed to save user:" + err2);
-               });            }
-            //
+               var newUser = new db.User();
+               newUser.foursquare_id = foursquare_user.id;
+               newUser.full_name = foursquare_user.firstName + " " + foursquare_user.lastName;
+               newUser.first_name = foursquare_user.firstName;
+               newUser.last_name = foursquare_user.lastName;
+               newUser.access_token = accessToken;
+               console.log("Saving User", newUser);
+               newUser.save(function(saveError) {
+                  if (saveError) {
+                     LocalUtils.throwError(saveError);
+                  }
+                  redirectHome(foursquare_id, accessToken,  res);
+                  return;
+               });
+            }
+            
+            redirectHome(foursquare_id, accessToken, res);
          });
       }
-});
+   });
 
 }

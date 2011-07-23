@@ -1,18 +1,14 @@
 h1 Jade - node template engine
 div(data-role = "page", id = "foo")
    div(data-role = "header")
-      h1 Foo
+      h1 Real Estate for Sale
    div(data-role = "content")
-      p I 'm first in the source order so I'm shown as the page.
-      center
-         div
-            a(href="/login",data-role="button",data-theme="b",data-icon="star", data-inline="true", style="width: 200px;", rel="external")
-               span Start
-         div
-            a(href="index.html",data-role="button",data-icon="star", data-inline="true")
-               span Info
-   p View internal page called
-         a(href = "#bar") #{user_id} #{title}
+      ul(data-role="listview", data-inset="true")
+         - venues.forEach(function(venue){
+            li
+               img(src="#{venue.venue.categories[0].icon}", class="ui-li-icon")
+               #{venue.venue.name}
+         - })
    div(data-role = "footer")
       h4 Page Footer
 div(data-role = "page", id = "bar")
