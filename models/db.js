@@ -1,23 +1,32 @@
 var mongoose = require('mongoose');
-
-var db = mongoose.connect("mongodb:jaciones:ha7141@dbh23.mongolab.com:27237/jaciones");
-
-var Schema = mongoose.Schema
+mongoose.connect("mongodb:jaciones:ha7141@dbh23.mongolab.com:27237/jaciones");
+Schema = mongoose.Schema;
 
 function validatePresenceOf(value) {
   return value && value.length;
 }
 
-User = new Schema({
+UserSchema = new Schema({
   'foursquare_id': { type: String, validate: [validatePresenceOf, 'Foursquare ID is required'] },
   'full_name': String,
   'first_name': String,
   'last_name': String,
-  'access_token': { type: String, validate: [validatePresenceOf, 'Foursquare access_token is required'] }
+  'access_token': { type: String, validate: [validatePresenceOf, 'Foursquare access_token is required'] },
+  'bank_amount' : { type: Number, 'default': 0.0 },
+  'venues' : [String],
+  'level' : { type: Number, min: 1, max: 100, 'default': 1 } 
 });
 
-mongoose.model('User', User);
+VenueSchema = new Schema({
+   'id': {
+      type: String,
+      validate: [validatePresenceOf, 'Venue ID is required']
+   },
+   'owner_id': String,
+   'name': String,
+   'icon': String
+});
 
-exports.DB = {
-   'User' : mongoose.model('User')
-};
+
+User = mongoose.model('User', UserSchema);
+Venue = mongoose.model('Venue', VenueSchema);

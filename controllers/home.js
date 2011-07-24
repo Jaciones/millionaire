@@ -1,15 +1,6 @@
 var db = require('../models/db').DB;
 var LocalUtils = require('../helpers/utils');
-
-var config = {
-   "secrets": {
-      "clientId": "A1NL3FU1D1QS2SH5YCXQX5D4Y1NMQUXRKV0HZOBBIADI4CBH",
-      "clientSecret": "UEFWAG4WSEAY5S3QIN1AS3ULF30HAZZGEOEGHCG0N2Z0AMLS",
-      "redirectUrl": "http://jaciones_test_repository.jaciones.cloud9ide.com/callback"
-   }
-};
-
-var Foursquare = require("node-foursquare")(config);
+require('../models/venue');
 
 app.get('/', function(req, res) {
    
@@ -27,20 +18,19 @@ app.get('/', function(req, res) {
 
 app.get('/home', function(req, res) {
    var user_id = LocalUtils.getCookie('user_id', req);
-   var access_token = LocalUtils.getCookie('access_token', req);
-   
-   var callback = function(err, data) {
-      console.log("Checkins", data);
-      var venues = data.venues.items;
-      console.log("Venues", venues);
-      
-         res.render('home', {
-            title: 'Express',
-            venues: venues
-         });
-       };
 
-    var checkins = Foursquare.Users.getVenueHistory('self', null, access_token, callback);
+   User.findOne({
+      'foursquare_id': user_id
+   }, function(err, user) {
+      if (err) {
+         LocalUtils.throwError(err);
+         return;
+      }
+      console.log("Found user");
+      res.render('home', {
+         user: user
+      });
+   });
 });
 
 app.get('/login', function(req, res) {
@@ -84,7 +74,7 @@ function login(accessToken, res) {
          foursquare_user = foursquare_user.user; // Get User
          var foursquare_id = foursquare_user.id;
          console.log("Foursquare User", foursquare_user);
-         db.User.findOne({
+         User.findOne({
             'foursquare_id': foursquare_id
          }, function(err, user) {
             if (err) {

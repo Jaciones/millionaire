@@ -1,5 +1,7 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
-
-a {color: #00B7FF;}
+a {color: #00B7FF; vertical-align: middle;}
+img { vertical-align: middle; }
+span {vertical-align: middle;}
+.green {color: #7B9344;} 

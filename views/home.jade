@@ -1,25 +1,11 @@
-h1 Jade - node template engine
+h1 Home
 div(data-role = "page", id = "foo")
    div(data-role = "header")
-      h1 Real Estate for Sale
+      h1 #{user.full_name}
    div(data-role = "content")
-      ul(data-role="listview", data-inset="true")
-         - venues.forEach(function(venue){
-            li
-               img(src="#{venue.venue.categories[0].icon}", class="ui-li-icon")
-               #{venue.venue.name}
-         - })
+      <a href="/bank" data-role="button">Bank</a>
+      <a href="/buy" data-role="button">Buy</a>
+   
    div(data-role = "footer")
-      h4 Page Footer
-div(data-role = "page", id = "bar")
-   div(data-role = "header")
-      h1 Bar
-   div(data-role = "content")
-      ul(data-role="listview")
-         li Alpha
-         li Beta
-         li Omega
-      p I'm first in the source order so I'm shown as the page.
-      a(href="#foo") Back to foo
-   div(data-role = "footer")
-      h4 Page Footer
+      a(href="index.html",data-role="button",data-icon="home") Home
+      a(href="foo.html",data-role="button",data-icon="arrow-down") Down
