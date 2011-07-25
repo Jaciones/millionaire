@@ -6,6 +6,7 @@
 var express = require('express');
 app = module.exports = express.createServer();
 require('./models/foursquare');
+require('./lib/date');
 // Configuration
 
 app.configure(function() {
@@ -31,7 +32,6 @@ app.configure('production', function(){
 require('./controllers/home');
 require('./controllers/buy');
 require('./controllers/bank');
-
 app.listen(process.env.C9_PORT);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 

@@ -12,9 +12,11 @@ UserSchema = new Schema({
   'first_name': String,
   'last_name': String,
   'access_token': { type: String, validate: [validatePresenceOf, 'Foursquare access_token is required'] },
-  'bank_amount' : { type: Number, 'default': 0.0 },
+  'bank_balance' : { type: Number, 'default': 0.0 },
+  'last_check_issued_date' : Date,
+  'salary' : { type: Number, min: 50 } ,
   'venues' : [String],
-  'level' : { type: Number, min: 1, max: 100, 'default': 1 } 
+  'level' : { type: Number, min: 1, max: 100 } 
 });
 
 VenueSchema = new Schema({

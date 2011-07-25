@@ -10,9 +10,19 @@ app.get('/bank', function(req, res) {
          LocalUtils.throwError(err);
          return;
       }
-      console.log("Found user");
+      setCheckAmount(user);
       res.render('bank', {
          user: user
       });
    });
 });
+
+function setCheckAmount(user) {
+   if (user.last_check_issued_date) {
+      if (Date.today().addHours(-24) > user.last_check_issued_date) {
+         user.check_amount = user.salary;         
+      }
+   }else {
+      user.check_amount = user.salary;
+   }
+}
