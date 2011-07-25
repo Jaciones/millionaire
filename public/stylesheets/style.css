@@ -4,4 +4,10 @@ body {
 a {color: #00B7FF; vertical-align: middle;}
 img { vertical-align: middle; }
 span {vertical-align: middle;}
-.green {color: #7B9344;} 
+.green {color: #7B9344;}
+
+/* Icons */
+.ui-icon-m-home {background:transparent url('/images/house.png') no-repeat scroll left top; width: 26px; height: 26px;}
+.ui-icon-m-finance {background:transparent url('/images/briefcase.png') no-repeat scroll left top;width: 26px; height: 26px;}
+.ui-icon-m-friends {background:transparent url('/images/world.png') no-repeat scroll left top;width: 26px; height: 26px;}
+.ui-icon-m-buy {background:transparent url('/images/piggy.png') no-repeat scroll left top;width: 26px; height: 26px;}

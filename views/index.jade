@@ -1,9 +1,4 @@
-h1 Jade - node template engine
-div(data-role = "page", id = "foo")
-   div(data-role = "header")
-      h1 Foo
-   div(data-role = "content")
-      p I 'm first in the source order so I'm shown as the page.
+   p I 'm first in the source order so I'm shown as the page.
       center
          div
             a(href="/login",data-role="button",data-theme="b",data-icon="star", data-inline="true", style="width: 200px;", rel="external")
@@ -13,17 +8,4 @@ div(data-role = "page", id = "foo")
                span Info
    p View internal page called
          a(href = "#bar") #{user_id} #{title}
-   div(data-role = "footer")
-      h4 Page Footer
-div(data-role = "page", id = "bar")
-   div(data-role = "header")
-      h1 Bar
-   div(data-role = "content")
-      ul(data-role="listview")
-         li Alpha
-         li Beta
-         li Omega
-      p I'm first in the source order so I'm shown as the page.
-      a(href="#foo") Back to foo
-   div(data-role = "footer")
-      h4 Page Footer
+

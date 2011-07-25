@@ -1,20 +1,10 @@
-h1 Jade - node template engine
-div(data-role = "page", id = "foo")
-   div(data-role = "header")
-      h1 Real Estate
-   div(data-role = "content")
-      ul(data-role="listview")
-         - venues.forEach(function(venue){
-         li(data-iconsize="44")
-            a(href="#")
-               img(src="#{venue.venue.categories[0].icon}", class="ui-li-icon", style="height:16px;width:16px;") 
-               span(class="green")
-                  $#{venue.value}&nbsp;
-               span
-                  #{venue.venue.name} 
-             
-               
-         - })
-   div(data-role = "footer")
-      a(href="index.html",data-role="button",data-icon="home") Home
-      a(href="foo.html",data-role="button",data-icon="arrow-down") Down
+ul(data-role="listview")
+   - venues.forEach(function(venue){
+   li(data-iconsize="44")
+      a(href="#")
+         img(src="#{venue.venue.categories[0].icon}", class="ui-li-icon", style="height:16px;width:16px;") 
+         span(class="green")
+            $#{venue.value}&nbsp;
+         span
+            #{venue.venue.name} 
+   - })

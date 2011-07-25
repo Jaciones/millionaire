@@ -1,10 +1,26 @@
 !!! 5
 html(lang="en")
-  head
-    title My Site
-    <meta name="viewport" content="width=device-width, initial-scale=1"> 
-    script(src='http://code.jquery.com/jquery-1.6.1.min.js')
-    script(src='http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.js')
-    link(rel='stylesheet', href='http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.css')
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body!= body
+   head
+      title My Site
+      <meta name="viewport" content="width=device-width, initial-scale=1"> 
+      script(src='http://code.jquery.com/jquery-1.6.1.min.js')
+      script(src='http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.js')
+      link(rel='stylesheet', href='http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.css')
+      link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+   div(data-role = "page", id = "foo")
+      div(data-role = "header")
+         h1 FooBar
+      div(data-role = "content")
+         body!= body
+      div(data-role = "navbar", data-position="fixed")
+         ul
+            li
+               a(href="/home",data-role="button", data-icon="m-home", data-iconpos="top") Home
+            li
+               a(href="/bank",data-role="button", data-icon="m-finance", data-iconpos="top") Bank
+            li
+               a(href="/buy",data-role="button", data-icon="m-buy", data-iconpos="top") Buy
+            li
+               a(href="/friends",data-role="button", data-icon="m-friends", data-iconpos="top") Friends
+

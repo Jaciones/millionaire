@@ -1,12 +1,4 @@
-h1 Bank
-div(data-role = "page", id = "foo")
-   div(data-role = "header")
-      h1 Bank
-   div(data-role = "content")
-      div Bank Balance: $#{user.bank_balance}
-      div Check Amount: $#{user.check_amount}
-   form(action="/bank/cash_check", method="post")
-      input(type="submit", value="Cash Check")
-   div(data-role = "footer")
-      a(href="/home",data-role="button",data-icon="home") Home
-      a(href="foo.html",data-role="button",data-icon="arrow-down") Down
+div Bank Balance: $#{user.bank_balance}
+div Check Amount: $#{user.check_amount}
+form(action="/bank/cash_check", method="post")
+   input(type="submit", value="Cash Check")
