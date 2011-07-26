@@ -1,4 +1,5 @@
 var LocalUtils = require('../helpers/utils');
+var RESET_TIME_IN_MINUTES = 24 * 60;
 
 app.post('/bank/cash_check', function(req, res) {
    var user_id = LocalUtils.getCookie('user_id', req);
@@ -65,8 +66,8 @@ function cashCheck(user, callback) {
 function setCheckAmount(user, callback) {
    console.log("SetCgeck", user);
    if (user.last_check_issued_date) {
-      if (Date.today().addHours(-24) > user.last_check_issued_date) {
-         console.log("date", Date.today().addHours(-24), user.last_check_issued_date);
+      if (Date.today().addMinutes(-RESET_TIME_IN_MINUTES) > user.last_check_issued_date) {
+         console.log("date", Date.today().addMinutes(-RESET_TIME_IN_MINUTES), user.last_check_issued_date);
          user.check_amount = user.salary;
       }
    }

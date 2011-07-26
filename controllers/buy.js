@@ -3,6 +3,29 @@ var LocalUtils = require('../helpers/utils');
 app.get('/buy', function(req, res) {
    var user_id = LocalUtils.getCookie('user_id', req);
 
+   executeOnUser(user_id, function(user) {
+      getVenuesAsNecessary(user, function(venues, err) {
+         res.render('buy', {
+            layout: false,
+            title: 'Express',
+            venues: venues
+         });
+      });      
+   });
+});
+
+app.post('/buy/venue', function(req, res) {
+   var user_id = LocalUtils.getCookie('user_id', req);
+   var venue_id = 
+   executeOnUser(user_id, function(user) {
+   
+
+
+   });
+   
+});
+
+function executeOnUser(user_id, func) {
    User.findOne({
       'foursquare_id': user_id
    }, function(err, user) {
@@ -10,29 +33,9 @@ app.get('/buy', function(req, res) {
          LocalUtils.throwError(err);
          return;
       }
-      getVenuesAsNecessary(user, function(venues, err) {
-         res.render('buy', {
-            layout: false,
-            title: 'Express',
-            venues: venues
-         });
-      });
-
+      func(user);
    });
-});
-
-app.post('/buy/venue', function(req, res) {
-   var user_id = LocalUtils.getCookie('user_id', req);
-   var access_token = LocalUtils.getCookie('access_token', req);
-
-   Venue.getAllAvailableForUser(access_token, function(err, venues) {
-      res.render('buy', {
-         layout: false,
-         title: 'Express',
-         venues: venues
-      });
-   });
-});
+}
 
 function getVenuesAsNecessary(user, callback) {
    // If it's been less than 4 hours since last check, dont make call to Foursquare
