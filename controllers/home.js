@@ -3,9 +3,8 @@ var LocalUtils = require('../helpers/utils');
 require('../models/venue');
 
 app.get('/', function(req, res) {
-   
-   if (LocalUtils.getCookie('user_id', req) && LocalUtils.getCookie('access_token', req)) {
-      redirectHome(LocalUtils.getCookie('user_id', req), LocalUtils.getCookie('access_token', req), res);
+   if (LocalUtils.getCookie('user_id', req)) {
+      redirectHome(LocalUtils.getCookie('user_id', req), res);
       return;
    }
    
@@ -26,7 +25,6 @@ app.get('/home', function(req, res) {
          LocalUtils.throwError(err);
          return;
       }
-      console.log("Found user");
       res.render('home', {
          user: user
       });
@@ -55,9 +53,8 @@ app.get('/callback', function(req, res) {
    });
 });
 
-function redirectHome(user_id, accessToken, res) {
+function redirectHome(user_id, res) {
    res.cookie('user_id', user_id, { httpOnly: true});
-   res.cookie('access_token', accessToken, { httpOnly: true});
    res.writeHead(303, {
       "location": "/home"
    });
@@ -94,12 +91,12 @@ function login(accessToken, res) {
                   if (saveError) {
                      LocalUtils.throwError(saveError);
                   }
-                  redirectHome(foursquare_id, accessToken,  res);
+                  redirectHome(foursquare_id,  res);
                   return;
                });
             }
             
-            redirectHome(foursquare_id, accessToken, res);
+            redirectHome(foursquare_id, res);
          });
       }
    });

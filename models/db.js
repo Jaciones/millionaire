@@ -16,7 +16,9 @@ UserSchema = new Schema({
   'last_check_issued_date' : Date,
   'check_amount' : { type: Number, 'default': 0 } ,
   'salary' : { type: Number, min: 50, 'default': 50 } ,
-  'venues' : [String],
+  'purchased_venues' : [String],
+  'venues' : Array,
+  'venues_last_updated' : Date,
   'level' : { type: Number, min: 1, max: 100, 'default': 1 } 
 });
 

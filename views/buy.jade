@@ -1,11 +1,40 @@
-ul(data-role="listview")
+!!! 5
+html(lang="en")
+   head
+      title My Site
+      <meta name="viewport" content="width=device-width, initial-scale=1"> 
+      script(src='http://code.jquery.com/jquery-1.6.1.min.js')
+      script(src='http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.js')
+      link(rel='stylesheet', href='http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.css')
+      link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+   div(data-role = "page", id = "foo")
+      div(data-role = "header")
+         h1 FooBar
+      div(data-role = "content")
+         ul(data-role="listview")
+            - venues.forEach(function(venue){
+            li(data-iconsize="44")
+               a(href="##{venue.venue.id}")
+                  img(src="#{venue.venue.categories[0].icon}", class="ui-li-icon", style="height:16px;width:16px;") 
+                  span(class="green")
+                     $#{venue.value}&nbsp;
+                  span
+                     #{venue.venue.name}
+            - })
    - venues.forEach(function(venue){
-   li(data-iconsize="44")
-      a(href="/venue?id=#{venue.venue.id}")
-         img(src="#{venue.venue.categories[0].icon}", class="ui-li-icon", style="height:16px;width:16px;") 
-         span(class="green")
-            $#{venue.value}&nbsp;
-         span
-            #{venue.venue.name}
-   - })
-
+   div(id="#{venue.venue.id}", data-role = "page",data-add-back-btn="true")
+      div(data-role = "header")
+         h1 #{venue.venue.name}
+      div(data-role = "content")
+         div(class="ui-body ui-body-b")
+            center
+               div(class="green", style="font-size: 24px; font-weight: bold") $#{venue.value}
+               img(src="#{venue.venue.categories[0].icon}")
+               span #{venue.venue.name} 
+               div
+                  #{venue.venue.location.address} #{venue.venue.location.crossStreet}, #{venue.venue.location.city} #{venue.venue.location.state}
+               div
+                  a(href="buy/venue", data-role="button") Purchase for $#{venue.value}
+               
+   - })      
