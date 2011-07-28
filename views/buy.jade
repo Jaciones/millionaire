@@ -34,8 +34,8 @@ html(lang="en")
          div(class="ui-body ui-body-b")
             center
                div(class="green", style="font-size: 24px; font-weight: bold") $#{venue.value}
-               img(src="#{venue.venue.categories[0].icon}")
-               span #{venue.venue.name} 
+               div(class="fs_icon_holder")
+                  img(src="#{venue.venue.categories[0].icon}", class="dropshadow_white")
                div
                   #{venue.venue.location.address} #{venue.venue.location.crossStreet}, #{venue.venue.location.city} #{venue.venue.location.state}
                div

@@ -23,19 +23,22 @@ UserSchema = new Schema({
   'xp' : { type: Number, min: 1, 'default': 1 }
 });
 
-VenueSchema = new Schema({
-   'id': {
+VenueSchema = []; // We current use Foursquare json as schema.
+
+FriendListSchema = new Schema({
+   'user_id': {
       type: String,
       validate: [validatePresenceOf, 'Venue ID is required']
    },
-   'owner_id': String,
-   'name': String,
-   'icon': String
+   'friends': Array,
+   'next_update_date' : { type: Date, 'default': new Date() }
 });
 
 
 User = mongoose.model('User', UserSchema);
-Venue = mongoose.model('Venue', VenueSchema);
+Venue = VenueSchema;
+FriendList = mongoose.model('FriendList', FriendListSchema);
 
 require('../models/venue');
 require('../models/user');
+require('../models/friendList');
