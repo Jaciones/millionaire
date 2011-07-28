@@ -1,0 +1,7 @@
+center
+- venues.forEach(function(venue){
+   div(class="ui-body ui-body-b")
+      div(class="green", style="font-size: 24px; font-weight: bold") $#{venue.value}
+      img(src="#{venue.venue.categories[0].icon}")
+      span #{venue.venue.name}
+- })

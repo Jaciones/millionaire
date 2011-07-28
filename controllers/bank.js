@@ -1,5 +1,4 @@
 var LocalUtils = require('../helpers/utils');
-var RESET_TIME_IN_MINUTES = 24 * 60;
 
 app.post('/bank/cash_check', function(req, res) {
    var user_id = LocalUtils.getCookie('user_id', req);
@@ -15,7 +14,6 @@ app.post('/bank/cash_check', function(req, res) {
          res.render('bank', {
             user: user
          });
-
       });
    });
 });
@@ -29,13 +27,7 @@ app.get('/bank/cash_check', function(req, res) {
 app.get('/bank', function(req, res) {
    var user_id = LocalUtils.getCookie('user_id', req);
 
-   User.findOne({
-      'foursquare_id': user_id
-   }, function(err, user) {
-      if (err) {
-         LocalUtils.throwError(err);
-         return;
-      }
+   User.executeOnUser(user_id, function(user) {
       setCheckAmount(user, function() {
          res.render('bank', {
             user: user
@@ -45,36 +37,32 @@ app.get('/bank', function(req, res) {
 });
 
 function cashCheck(user, callback) {
-   console.log("cashCheck", user);
-
    if (user.check_amount > 0) {
-      user.bank_balance = user.bank_balance + user.salary;
+      user.bank_balance = user.bank_balance + 1000;//user.salary;
       user.check_amount = 0;
-      user.last_check_issued_date = new Date();
+      user.next_check_issue_date = Date.now().addMinutes(2);
    }
    user.save(function(err) {
       if (err) {
          LocalUtils.throwError(err);
          return;
       }
-      console.log("end cashCheck", user);
-
       callback();
    });
 }
 
 function setCheckAmount(user, callback) {
-   console.log("SetCgeck", user);
-   if (user.last_check_issued_date) {
-      if (Date.today().addMinutes(-RESET_TIME_IN_MINUTES) > user.last_check_issued_date) {
-         console.log("date", Date.today().addMinutes(-RESET_TIME_IN_MINUTES), user.last_check_issued_date);
+   var targetTime = Date.now();
+
+   if (user.next_check_issue_date) {
+      if (targetTime > user.next_check_issue_date) {
          user.check_amount = user.salary;
       }
    }
    else {
-      console.log("default");
       user.check_amount = user.salary;
    }
+
    user.save(function(err) {
       if (err) {
          LocalUtils.throwError(err);

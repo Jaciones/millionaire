@@ -8,19 +8,30 @@ html(lang="en")
       link(rel='stylesheet', href='http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.css')
       link(rel='stylesheet', href='/stylesheets/style.css')
   body
-   div(data-role = "page", id = "foo")
+   div(data-role = "page", data-theme="a")
       div(data-role = "header")
-         h1 FooBar
+            center
+               div(class="header_box")
+                  div(class="sub_head")
+                     div(style="font-family: mill;", class="title") Fourmillionaire
       div(data-role = "content")
          body!= body
       div(data-role = "navbar", data-position="fixed")
          ul
             li
-               a(href="/home",data-role="button", data-icon="m-home", data-iconpos="top") Home
+               a(href="/home",data-role="button", style="font-family: mill;", class="navbar_bottom") 
+                  img(src="/images/house.png")
+                  div Home
             li
-               a(href="/bank",data-role="button", data-icon="m-finance", data-iconpos="top") Bank
+               a(href="/bank",data-role="button", style="font-family: mill;", class="navbar_bottom") 
+                  img(src="/images/briefcase.png")
+                  div Bank
             li
-               a(href="/buy",data-role="button", data-icon="m-buy", data-iconpos="top", data-ajax="false") Buy
+               a(href="/buy",data-role="button", style="font-family: mill;", class="navbar_bottom", data-ajax="false") 
+                  img(src="/images/piggy.png")
+                  div Buy
             li
-               a(href="/friends",data-role="button", data-icon="m-friends", data-iconpos="top") Friends
+               a(href="/friends",data-role="button", style="font-family: mill;", class="navbar_bottom") 
+                  img(src="/images/world.png")
+                  div Friends
 

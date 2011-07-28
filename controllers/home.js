@@ -1,16 +1,14 @@
 var db = require('../models/db').DB;
 var LocalUtils = require('../helpers/utils');
-require('../models/venue');
 
 app.get('/', function(req, res) {
    if (LocalUtils.getCookie('user_id', req)) {
       redirectHome(LocalUtils.getCookie('user_id', req), res);
       return;
    }
-   
+
    res.render('index', {
-      title: 'Express',
-      bar: 'Bar',
+      layout: false,
       user_id: LocalUtils.getCookie('user_id', req)
    });
 });
@@ -18,13 +16,7 @@ app.get('/', function(req, res) {
 app.get('/home', function(req, res) {
    var user_id = LocalUtils.getCookie('user_id', req);
 
-   User.findOne({
-      'foursquare_id': user_id
-   }, function(err, user) {
-      if (err) {
-         LocalUtils.throwError(err);
-         return;
-      }
+   User.executeOnUser(user_id, function(user) {
       res.render('home', {
          user: user
       });
@@ -71,13 +63,7 @@ function login(accessToken, res) {
          foursquare_user = foursquare_user.user; // Get User
          var foursquare_id = foursquare_user.id;
          console.log("Foursquare User", foursquare_user);
-         User.findOne({
-            'foursquare_id': foursquare_id
-         }, function(err, user) {
-            if (err) {
-               LocalUtils.throwError(err);
-               return;
-            }
+         User.executeOnUser(foursquare_id, function(user) {
             console.log("Found user");
             if (!user) {
                var newUser = new db.User();

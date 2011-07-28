@@ -1,6 +1,10 @@
-body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+@font-face {
+   font-family: mill;
+	src: url('/font/mill.ttf');
 }
+
+body {  }
+
 a {color: #00B7FF; vertical-align: middle;}
 img { vertical-align: middle; }
 span {vertical-align: middle;}
@@ -11,3 +15,16 @@ span {vertical-align: middle;}
 .ui-icon-m-finance {background:transparent url('/images/briefcase.png') no-repeat scroll left top;width: 26px; height: 26px;}
 .ui-icon-m-friends {background:transparent url('/images/world.png') no-repeat scroll left top;width: 26px; height: 26px;}
 .ui-icon-m-buy {background:transparent url('/images/piggy.png') no-repeat scroll left top;width: 26px; height: 26px;}
+.ui-icon-fourquare {background:transparent url('/images/foursquare_small.png') no-repeat scroll left top;width: 34px; height: 34px;}
+
+.title { -webkit-text-stroke: 2px #082704;font-size: 30px; color: #ffb80b}
+
+.login_btn_text {padding-left: 10px; font-size: 25px;}
+.why {margin: 5px 0 5px 0;}
+.why_box {font-size: 12px; width: 200px; text-align: left;-moz-border-radius: 1em; -webkit-border-radius: 1em; border-radius: 1em;}
+.header_box { background: #eee; border: 2px solid #ffb80b; margin: 10px 0 10px 0; width: 250px; -moz-border-radius: 1em; -webkit-border-radius: 1em; border-radius: 1em;}
+.sub_head {border: 1px solid #444;padding: 5px 10px 5px 10px; -moz-border-radius: 1em; -webkit-border-radius: 1em; border-radius: 1em; }
+
+
+/* Jquery Mobile Overrides */
+.navbar_bottom .ui-btn-inner {padding-top: 5px;}

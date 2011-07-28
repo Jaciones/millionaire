@@ -6,8 +6,13 @@ function LocalUtils() {
 
    this.throwError = function(error, res) {
       console.log("Thrown error", error);
-      res.send("Error: " + (error.message || "no info"));
-      res.end();
+      if (res) {
+         res.send("Error: " + (error.message || "no info"));
+         res.end();
+      }else {
+         throw error;
+      }
+      
    };
 }
 

@@ -13,13 +13,14 @@ UserSchema = new Schema({
   'last_name': String,
   'access_token': { type: String, validate: [validatePresenceOf, 'Foursquare access_token is required'] },
   'bank_balance' : { type: Number, 'default': 0.0 },
-  'last_check_issued_date' : Date,
+  'next_check_issue_date' : { type: Date, 'default': new Date() },
   'check_amount' : { type: Number, 'default': 0 } ,
-  'salary' : { type: Number, min: 50, 'default': 50 } ,
-  'purchased_venues' : [String],
+  'salary' : { type: Number, min: 200, 'default': 200 } ,
+  'purchased_venues' : Array,
   'venues' : Array,
   'venues_last_updated' : Date,
-  'level' : { type: Number, min: 1, max: 100, 'default': 1 } 
+  'level' : { type: Number, min: 1, max: 100, 'default': 1 },
+  'xp' : { type: Number, min: 1, 'default': 1 }
 });
 
 VenueSchema = new Schema({
@@ -35,3 +36,6 @@ VenueSchema = new Schema({
 
 User = mongoose.model('User', UserSchema);
 Venue = mongoose.model('Venue', VenueSchema);
+
+require('../models/venue');
+require('../models/user');

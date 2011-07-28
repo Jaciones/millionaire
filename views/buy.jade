@@ -35,6 +35,8 @@ html(lang="en")
                div
                   #{venue.venue.location.address} #{venue.venue.location.crossStreet}, #{venue.venue.location.city} #{venue.venue.location.state}
                div
-                  a(href="buy/venue", data-role="button") Purchase for $#{venue.value}
-               
+                  form(action="buy/venue", method="post")
+                     input(type="hidden", value="#{venue.venue.id}", name="venue_id")
+                     input(type="submit", value="Purchase for $#{venue.value}")
+
    - })      
