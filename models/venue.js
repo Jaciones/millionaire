@@ -24,3 +24,7 @@ Venue.assignValue = function(venue) {
       venue.value = visitIndex * 200;
    }
 };
+
+Venue.profitValue = function(venue) {
+   return venue.value / 10;
+};

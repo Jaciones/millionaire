@@ -52,17 +52,7 @@ function cashCheck(user, callback) {
 }
 
 function setCheckAmount(user, callback) {
-   var targetTime = Date.now();
-
-   if (user.next_check_issue_date) {
-      if (targetTime > user.next_check_issue_date) {
-         user.check_amount = user.salary;
-      }
-   }
-   else {
-      user.check_amount = user.salary;
-   }
-
+   user.setCheckAmount();
    user.save(function(err) {
       if (err) {
          LocalUtils.throwError(err);

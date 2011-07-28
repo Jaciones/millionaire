@@ -5,6 +5,7 @@ app.get('/portfolio', function(req, res) {
    User.executeOnUser(user_id, function(user) {
        console.log(user.purchased_venues); 
        res.render('portfolio', {
+            layout: false,
             venues: user.purchased_venues
          });
    });

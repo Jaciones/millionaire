@@ -1,4 +1,4 @@
 div Bank Balance: $#{user.bank_balance}
 div Check Amount: $#{user.check_amount}
 form(action="/bank/cash_check", method="post")
-   input(type="submit", value="Cash Check")
+   input(type="submit", value="Cash Check", data-ajax="false")

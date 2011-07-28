@@ -35,7 +35,6 @@ app.post('/buy/venue', function(req, res) {
 });
 
 function getVenuesAsNecessary(user, callback) {
-   // If it's been less than 4 hours since last check, dont make call to Foursquare
    if (user.venues_last_updated && Date.today() > user.venues_last_updated) {
       callback(user.venues);
       return;

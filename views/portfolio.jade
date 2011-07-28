@@ -1,7 +1,55 @@
 center
-- venues.forEach(function(venue){
-   div(class="ui-body ui-body-b")
-      div(class="green", style="font-size: 24px; font-weight: bold") $#{venue.value}
-      img(src="#{venue.venue.categories[0].icon}")
-      span #{venue.venue.name}
-- })
+   ul(data-role="listview")
+    - venues.forEach(function(venue){
+    li(data-iconsize="44")
+       a(href="/foo")
+           div(class="")
+               img(src="#{venue.venue.categories[0].icon}")
+               span(style="display:inline;font-family: mill;padding-left: 10px") #{venue.venue.name} 
+               span(class="portfolio_badge rounded") +$#{venue.value / 10}
+      - })
+
+
+!!! 5
+html(lang="en")
+   head
+      title My Site
+      <meta name="viewport" content="width=device-width, initial-scale=1"> 
+      script(src='http://code.jquery.com/jquery-1.6.1.min.js')
+      script(src='http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.js')
+      link(rel='stylesheet', href='http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.css')
+      link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+   div(data-role = "page", id = "foo")
+      div(data-role = "header")
+            center
+               div(class="header_box")
+                  div(class="sub_head")
+                     div(style="font-family: mill;", class="title") Fourmillionaire
+
+      div(data-role = "content")
+         ul(data-role="listview")
+            - venues.forEach(function(venue){
+            li(data-iconsize="44")
+               a(href="##{venue.venue.id}")
+                  div(class="")
+                     img(src="#{venue.venue.categories[0].icon}")
+                     span(style="display:inline;font-family: mill;padding-left: 10px") #{venue.venue.name} 
+                     span(class="portfolio_badge rounded") +$#{venue.value / 10}
+            - })
+   - venues.forEach(function(venue){
+   div(id="#{venue.venue.id}", data-role = "page",data-add-back-btn="true")
+      div(data-role = "header")
+         h1 #{venue.venue.name}
+      div(data-role = "content")
+         div(class="ui-body ui-body-b")
+            center
+               div(class="green", style="font-size: 24px; font-weight: bold") $#{venue.value}
+               img(src="#{venue.venue.categories[0].icon}")
+               span #{venue.venue.name} 
+               div
+                  #{venue.venue.location.address} #{venue.venue.location.crossStreet}, #{venue.venue.location.city} #{venue.venue.location.state}
+
+
+   - })      
+

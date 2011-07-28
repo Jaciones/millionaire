@@ -37,3 +37,28 @@ User.prototype.findVenueInPurchased = function(venue_id) {
    }
    return null;
 };
+
+User.prototype.setCheckAmount = function() {
+   var targetTime = Date.now();
+
+   if (this.next_check_issue_date) {
+      if (targetTime > this.next_check_issue_date) {
+         this.check_amount = this.salary;
+         this.check_amount += this.calculateVenueProfits();
+      }
+   }
+   else {
+      this.check_amount = this.salary;
+   }
+};
+
+User.prototype.calculateVenueProfits = function() {
+   var length = this.purchased_venues.length;
+   var profits = 0;
+
+   for (var i = 0; i < length; i++) {
+      var venue = this.purchased_venues[i];
+      profits += Venue.profitValue(venue);
+   }
+   return profits;
+};

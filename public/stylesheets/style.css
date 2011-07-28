@@ -24,7 +24,10 @@ span {vertical-align: middle;}
 .why_box {font-size: 12px; width: 200px; text-align: left;-moz-border-radius: 1em; -webkit-border-radius: 1em; border-radius: 1em;}
 .header_box { background: #eee; border: 2px solid #ffb80b; margin: 10px 0 10px 0; width: 250px; -moz-border-radius: 1em; -webkit-border-radius: 1em; border-radius: 1em;}
 .sub_head {border: 1px solid #444;padding: 5px 10px 5px 10px; -moz-border-radius: 1em; -webkit-border-radius: 1em; border-radius: 1em; }
-
+.rounded { -moz-border-radius: 1em; -webkit-border-radius: 1em; border-radius: 1em;}
+/* Portfolio */
+.portfolio_badge { background: #fff; border: 3px solid #397D02; padding: 3px 10px 3px 10px;}
+.portfolio_info_sub {}
 
 /* Jquery Mobile Overrides */
 .navbar_bottom .ui-btn-inner {padding-top: 5px;}

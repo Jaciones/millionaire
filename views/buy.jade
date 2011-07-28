@@ -10,7 +10,11 @@ html(lang="en")
   body
    div(data-role = "page", id = "foo")
       div(data-role = "header")
-         h1 FooBar
+            center
+               div(class="header_box")
+                  div(class="sub_head")
+                     div(style="font-family: mill;", class="title") Fourmillionaire
+
       div(data-role = "content")
          ul(data-role="listview")
             - venues.forEach(function(venue){
