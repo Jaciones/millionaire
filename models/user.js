@@ -52,6 +52,18 @@ User.prototype.setCheckAmount = function() {
    }
 };
 
+User.prototype.setNetWorth = function () {
+   var length = this.purchased_venues.length;
+   var newWorth = this.bank_balance;
+
+   for (var i = 0; i < length; i++) {
+      var venue = this.purchased_venues[i];
+      newWorth += venue.value;
+   }
+   
+   return newWorth; 
+};
+
 User.prototype.calculateVenueProfits = function() {
    var length = this.purchased_venues.length;
    var profits = 0;
@@ -61,4 +73,35 @@ User.prototype.calculateVenueProfits = function() {
       profits += Venue.profitValue(venue);
    }
    return profits;
+};
+
+User.login = function(accessToken, callback) {
+     Foursquare.Users.getUser('self', accessToken, function(err_foursquare, foursquare_user) {
+      if (err_foursquare) {
+         LocalUtils.throwError(err_foursquare);
+         return;
+      }
+      else {
+         foursquare_user = foursquare_user.user; 
+         var foursquare_id = foursquare_user.id;
+         console.log("Foursquare User", foursquare_user);
+         User.executeOnUser(foursquare_id, function(user) {
+            console.log("Found user");
+            var newUser = user ? user:new User();
+            newUser.foursquare_id = foursquare_user.id;
+            newUser.first_name = foursquare_user.firstName;
+            newUser.last_name = foursquare_user.lastName;
+            newUser.access_token = accessToken;
+            newUser.save(function(saveError) {
+               if (saveError) {
+                  LocalUtils.throwError(saveError);
+               }
+               FriendList.setFriendsForUser(newUser, function(friendList) {
+                  callback(foursquare_id);
+               });
+               return;
+            });
+         });
+      }
+   });
 };

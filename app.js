@@ -30,6 +30,7 @@ app.configure('production', function(){
 
 // Routes
 require('./models/db');
+
 require('./controllers/home');
 require('./controllers/buy');
 require('./controllers/bank');

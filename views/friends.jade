@@ -1,0 +1,8 @@
+ul(data-role="listview")
+   - friends.forEach(function(friend){
+   li
+      a(href="/friend")
+         div(class="")
+            img(src="#{friend.photo}", class="small_user")
+            div(style="display:inline-block;font-family: mill;padding-left: 10px") #{friend.firstName + " " + friend.lastName}
+   - })

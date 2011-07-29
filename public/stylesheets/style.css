@@ -25,6 +25,7 @@ span {vertical-align: middle;}
 .header_box { background: #eee; border: 2px solid #ffb80b; margin: 10px 0 10px 0; width: 250px; -moz-border-radius: 1em; -webkit-border-radius: 1em; border-radius: 1em;}
 .sub_head {border: 1px solid #444;padding: 5px 10px 5px 10px; -moz-border-radius: 1em; -webkit-border-radius: 1em; border-radius: 1em; }
 .rounded { -moz-border-radius: 1em; -webkit-border-radius: 1em; border-radius: 1em;}
+.small_user {height: 36px; width :36px;}
 /* Portfolio */
 .portfolio_badge { background: #fff; border: 3px solid #397D02; padding: 3px 10px 3px 10px;}
 .dropshadow_white {-moz-box-shadow: 0 0 15px #fff; -webkit-box-shadow: 0x 0px 15px #fff; box-shadow: 0px 0px 15px #fff; }
