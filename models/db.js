@@ -16,7 +16,7 @@ UserSchema = new Schema({
   'check_amount' : { type: Number, 'default': 0 } ,
   'salary' : { type: Number, min: 200, 'default': 200 } ,
   'purchased_venues' : Array,
-  'new_worth' : { type: Number },
+  'net_worth' : { type: Number },
   'venues' : Array,
   'venues_last_updated' : Date,
   'level' : { type: Number, min: 1, max: 100, 'default': 1 },

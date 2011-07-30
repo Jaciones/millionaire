@@ -32,10 +32,10 @@ FriendList.updateFriendsForUserAsNecessary = function(user, callback) {
 };
 
 /* Used to create users from friends, no callback, fire and forget */
-FriendList.createUserIfMissing = function(friend) {
+FriendList.updateUserAsNecessary = function(friend) {
    User.executeOnUser(friend.id, function(user) {
       console.log("Friend", friend.id, user);
-      
+
       if (!user) {
          var newUser = new User();
          console.log("freind", friend);
@@ -47,7 +47,33 @@ FriendList.createUserIfMissing = function(friend) {
                LocalUtils.throwError(saveError);
             }
          });
+      }else {
+         console.log("here",user);
+         user.net_worth = user.getNetWorth();
+         user.save(function(error) {
+            if (error) {
+               LocalUtils.throwError(error);
+            }            
+         });
       }
+   });
+};
+
+FriendList.prototype.getFriendsAsUsers = function(callback) {
+   var friendIds = [];
+   var photos = {};
+   
+   this.friends.forEach(function(friend){
+      friendIds.push(friend.id);
+      photos[friend.id] = friend.photo;
+   });
+   
+   User.find({ foursquare_id : { $in : friendIds}}, function(err, results) {
+      if (err) {
+         LocalUtils.throwError(err);
+         return;
+      }
+      callback({ 'photos':photos, users: results});
    });
 };
 
@@ -66,8 +92,8 @@ FriendList.setFriendsForUser = function(user, callback) {
                friendList = newFriendList;
             }
             friendList.friends = friends.friends.items;
-            friendList.friends.forEach(function(friend){
-               FriendList.createUserIfMissing(friend);               
+            friendList.friends.forEach(function(friend) {
+               FriendList.updateUserAsNecessary(friend);
             });
             friendList.next_update_date = new Date().addDays(1);
             friendList.save(function(saveError) {

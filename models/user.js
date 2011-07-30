@@ -20,6 +20,14 @@ User.prototype.purchaseVenue = function(venue_id) {
    }
 };
 
+User.prototype.formatted_net_worth = function() {
+   console.log("====-=-=-=-=-", this.net_worth);
+   if (!this.net_worth)
+      return "$ 0.00";
+   
+   return "$ " + parseFloat(this.net_worth).toString();
+};
+
 User.prototype.findVenue = function(venue_id) {
    var length = this.venues.length;
    for (var i = 0; i < length; i++) {
@@ -52,7 +60,7 @@ User.prototype.setCheckAmount = function() {
    }
 };
 
-User.prototype.setNetWorth = function () {
+User.prototype.getNetWorth = function () {
    var length = this.purchased_venues.length;
    var newWorth = this.bank_balance;
 
