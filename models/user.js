@@ -21,7 +21,6 @@ User.prototype.purchaseVenue = function(venue_id) {
 };
 
 User.prototype.formatted_net_worth = function() {
-   console.log("====-=-=-=-=-", this.net_worth);
    if (!this.net_worth)
       return "$ 0.00";
    

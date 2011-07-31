@@ -11,7 +11,8 @@ app.get('/friends', function(req, res) {
             
             res.render('friends', {
                friends: users,
-               profile_photos: photos
+               profile_photos: photos,
+               user: user
             });
          });
       });
