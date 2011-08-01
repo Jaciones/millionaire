@@ -1,19 +1,23 @@
 div(class="ui-body ui-body-b")
    center
+      div(style="font-family: mill;") #{venue.venue.name}
       div(class="fs_icon_holder")
          img(src="#{venue.venue.categories[0].icon}", class="dropshadow_white")
       div
          #{venue.venue.location.address} #{venue.venue.location.crossStreet}, #{venue.venue.location.city} #{venue.venue.location.state}
 
-      div
+   div
          - multipliers.forEach(function(mult) {
          div
-            span
-               #{mult.name}
-            span
-               #{mult.desc}
-            form(action="buy/multiplier", method="post", data-ajax="false")
-               input(type="hidden", value="#{venue.venue.id}", name="venue_id")
-               input(type="hidden", value="#{mult.name}", name="multiplier_name")
-               input(type="submit", value="Purchase for $#{mult.cost}")
-         - })
+            div(data-role="collapsible", data-collapsed="true")
+               h3 
+                  img(src='#{mult.photo + "_32x32.png"}', style="width:32px;height:32px;")
+                  #{mult.name} ($#{mult.cost})
+               div
+                  img(src='#{mult.photo + "_64x64.png"}', style="width:64px;height:64px;")
+                  span(style="inline-block;width:50px;", class="red_border rounded") 
+                     #{mult.mini_desc}
+                  div #{mult.desc}
+                  a(href="http://www.facebook.com/dialog/feed?app_id=123050457758183&amp;redirect_uri=http://www.example.com/response/&amp;link=http://developers.facebook.com/docs/reference/dialogs/&amp;message=Facebook%20Dialogs%20are%20so%20easy!&amp;picture=http://fbrell.com/f8.jpg&amp;caption=Reference%20Documentation&amp;description=Dialogs%20provide%20a%20simple,%20consistent%20interface%20for%20applications%20to%20interact%20with%20users.&amp;name=Facebook%20Dialogs;")
+                     post to facebook
+- })
