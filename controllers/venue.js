@@ -8,7 +8,7 @@ app.get('/venue/:venue_id', function(req, res) {
     var facebookPostUrl = "http://www.facebook.com/dialog/feed?app_id=213700678680339&redirect_uri=" + facebookReturnUrl + "&amp;link=http://developers.facebook.com/docs/reference/dialogs/&amp;message=Come%20join%20the%20fun%20at%20Fourmillionaire.com!&picture=http://fbrell.com/f8.jpg&amp;caption=Fourmillionaire.com&amp;description=If%20you%20use%20Foursquare%20and%20have%20friends,%20you%20will%20have%20fun%20playing%20Fourmillionaire!&amp;name=Fourmillionaire;";
     var twitterPostUrl = "https://twitter.com/intent/user?text=Come%20play%Fourmillionaire%20with%me!";
     User.executeOnUser(user_id, function(user) {
-        var venue = user.findVenue(venue_id);
+        var venue = user.findVenueInPurchased(venue_id);
         res.render('venue', {
             user: user,
             venue: venue,

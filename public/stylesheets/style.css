@@ -47,3 +47,8 @@ img {margin-right: 10px;}
 .navbar_bottom .ui-btn-inner {padding-top: 5px;}
 
 .inline_button {width: 200px;}
+
+/* Venue */
+.venue_info div {margin: 8px 0 8px 0; }
+.venue_info {width: 200px;}
+.big_money {font-size: 24px;}
