@@ -7,17 +7,24 @@ div(class="ui-body ui-body-b")
          #{venue.venue.location.address} #{venue.venue.location.crossStreet}, #{venue.venue.location.city} #{venue.venue.location.state}
 
    div
-         - multipliers.forEach(function(mult) {
-         div
-            div(data-role="collapsible", data-collapsed="true")
-               h3 
-                  img(src='#{mult.photo + "_32x32.png"}', style="width:32px;height:32px;")
-                  #{mult.name} ($#{mult.cost})
-               div
-                  img(src='#{mult.photo + "_64x64.png"}', style="width:64px;height:64px;")
-                  span(style="inline-block;width:50px;", class="red_border rounded") 
-                     #{mult.mini_desc}
-                  div #{mult.desc}
-                  a(href="http://www.facebook.com/dialog/feed?app_id=123050457758183&amp;redirect_uri=http://www.example.com/response/&amp;link=http://developers.facebook.com/docs/reference/dialogs/&amp;message=Facebook%20Dialogs%20are%20so%20easy!&amp;picture=http://fbrell.com/f8.jpg&amp;caption=Reference%20Documentation&amp;description=Dialogs%20provide%20a%20simple,%20consistent%20interface%20for%20applications%20to%20interact%20with%20users.&amp;name=Facebook%20Dialogs;")
-                     post to facebook
-- })
+        - multipliers.forEach(function(mult) {
+        div(data-role="collapsible", data-collapsed="true")
+           h3 
+              img(src='#{mult.photo + "_32x32.png"}', class="small_photo")
+              #{mult.name} ($#{mult.cost})
+           div
+              img(src='#{mult.photo + "_64x64.png"}', class="big_photo")
+              span(class="green_border rounded") 
+                 #{mult.mini_desc}
+              div(class="generic_text") #{mult.desc}
+                - if (mult.id==="facebook_shop") {
+                    a(href="#{facebookPostUrl}", data-role="button", class="inline_button") Post to Facebook
+                - }else if (mult.id==="twitter_shop") {
+                    a(href="#{twitterPostUrl}, data-role="button") Post to Twitter
+                - }else {
+                     form(action="venue/#{venue.venue.id}/buy_multiplier", method="post", data-ajax="false")
+                        input(type="hidden", value="#{mult.id}", name="mult_id")
+                        input(type="submit", value="Purchase for $#{mult.cost}")                
+                - }
+                
+        - })

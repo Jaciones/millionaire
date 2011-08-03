@@ -10,6 +10,8 @@ img { vertical-align: middle; }
 span {vertical-align: middle;}
 .green {color: #7B9344;}
 .red {color: #aa0000;}
+.small_photo { width: 32px; height: 32px;}
+.big_photo { width: 64px; height: 64px;}
 
 .ui-icon-fourquare {background:transparent url('/images/foursquare_small.png') no-repeat scroll left top;width: 34px; height: 34px;}
 
@@ -21,7 +23,8 @@ span {vertical-align: middle;}
 .header_box { background: #eee; border: 2px solid #ffb80b; margin: 10px 0 10px 0; width: 250px; -moz-border-radius: 1em; -webkit-border-radius: 1em; border-radius: 1em;}
 .sub_head {border: 1px solid #444;padding: 5px 10px 5px 10px; -moz-border-radius: 1em; -webkit-border-radius: 1em; border-radius: 1em; }
 .rounded { -moz-border-radius: 1em; -webkit-border-radius: 1em; border-radius: 1em;}
-.red_border { border: 3px solid #7B9344; padding: 5px 10px 5px 10px; -moz-border-radius: 1em; -webkit-border-radius: 1em; border-radius: 1em;}
+.green_border { border: 3px solid #7B9344; padding: 5px 10px 5px 10px; -moz-border-radius: 1em; -webkit-border-radius: 1em; border-radius: 1em;}
+.generic_text { padding: 5px 5px 5px 0;}
 .small_user {height: 36px; width :36px;}
 .net_worth { margin-left: 10px; padding: 0px 10px 0 10px; border: 2px solid #7B9344; }
 .info { 
@@ -42,3 +45,5 @@ img {margin-right: 10px;}
 
 /* Jquery Mobile Overrides */
 .navbar_bottom .ui-btn-inner {padding-top: 5px;}
+
+.inline_button {width: 200px;}

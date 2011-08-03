@@ -1,10 +1,19 @@
 ul(data-role="listview")
    - venues.forEach(function(venue){
    li(data-iconsize="44")
-      a(href="/venue/#{venue.venue.id}")
-         div(class="")
+      a(href="/venue/#{venue.venue.id}",data-ajax="false" )
+         div(style="width:200px;")
             div(class="fs_icon_holder_sm")
                img(src="#{venue.venue.categories[0].icon}", class="dropshadow_white")
-            div(style="display:inline-block;font-family: mill;padding-left: 10px") #{venue.venue.name}
-            span(class="portfolio_badge rounded", style="display:inline;") +$#{venue.value / 10}
-   - })
+            div(style="display:inline-block;padding: 0 0 0 10px; position: relative; vertical-align: middle; line-height: 30px")
+                div
+                    span(style="font-family: mill;") #{venue.venue.name}
+                        br
+                    span(class="portfolio_badge rounded") +$#{venue.value / 10}
+                    - var multipliers = venue.multipliers || [];
+                    - multipliers.forEach(function(mult){
+                    span(style="padding-left: 10px")
+                        img(src='#{mult.photo + "_32x32.png"}', class="small_photo")
+                    - })
+ 
+    - })

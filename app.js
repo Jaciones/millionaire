@@ -17,6 +17,7 @@ app.configure(function() {
    app.use(express.session({ secret: "h7f74hghs" }));
    app.use(express.methodOverride());
    app.use(app.router);
+   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
    app.use(express.static(__dirname + '/public'));
 });
 

@@ -38,7 +38,7 @@ app.get('/bank', function(req, res) {
 
 function cashCheck(user, callback) {
    if (user.check_amount > 0) {
-      user.bank_balance = user.bank_balance + 1000;//user.salary;
+      user.bank_balance = user.bank_balance + user.salary;
       user.check_amount = 0;
       user.next_check_issue_date = Date.now().addMinutes(2);
    }

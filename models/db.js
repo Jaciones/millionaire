@@ -6,6 +6,17 @@ function validatePresenceOf(value) {
    return value && value.length;
 }
 
+PurchasedVenueSchema = new Schema({
+   'venue_id': {
+      type: String,
+      validate: [validatePresenceOf, 'VenueID is required'],
+      index: true
+   },
+   'venue_data' : Array,
+   'multipliers': Array
+});
+PurchasedVenue = mongoose.model('PurchasedVenue', PurchasedVenueSchema);
+
 UserSchema = new Schema({
    'foursquare_id': {
       type: String,
@@ -58,6 +69,7 @@ UserSchema.pre('save', function(next) {
    // something goes wrong
    next();
 });
+User = mongoose.model('User', UserSchema);
 
 VenueSchema = []; // We current use Foursquare json as schema.
 FriendListSchema = new Schema({
@@ -72,27 +84,11 @@ FriendListSchema = new Schema({
       'default': new Date()
    }
 });
-
-MultiplierSchema = new Schema({
-   'user_id': {
-      type: String,
-      validate: [validatePresenceOf, 'UserID is required'],
-      index: true
-   },
-   'venue_id': {
-      type: String,
-      validate: [validatePresenceOf, 'VenueID is required'],
-      index: true
-   },
-   'multiplier_type': String
-});
-
-User = mongoose.model('User', UserSchema);
-Venue = VenueSchema;
 FriendList = mongoose.model('FriendList', FriendListSchema);
-Multiplier = mongoose.model('Multiplier', MultiplierSchema);
+
+Venue = VenueSchema;
 
 require('../models/venue');
 require('../models/user');
-require('../models/multiplier');
+require('../models/purchasedVenue');
 require('../models/friendList');

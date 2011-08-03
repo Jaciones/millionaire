@@ -20,6 +20,23 @@ User.prototype.purchaseVenue = function(venue_id) {
    }
 };
 
+User.prototype.purchaseMultiplier = function(venue_id, mult_id) {
+   // Force purchased venues to be resaved
+   this.purchased_venues = this.purchased_venues.filter(function() { return true; });
+   
+   var venue = this.findVenueInPurchased(venue_id);
+   var multipliers = venue.multipliers || [];
+   if (multipliers.length < 2) {
+       var target_mult = MultiplierTypes.findMultiplier(mult_id);
+       if(this.bank_balance > target_mult.cost) {
+           this.bank_balance = this.bank_balance - target_mult.cost;
+           multipliers.push(target_mult);
+           venue.multipliers = multipliers;
+           this.purchased_venues = this.purchased_venues;
+       }
+   }        
+};
+
 User.prototype.formatted_net_worth = function() {
    if (!this.net_worth)
       return "$ 0.00";
