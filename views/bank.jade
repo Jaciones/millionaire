@@ -1,4 +1,18 @@
+-if (user.check_amount == 0) {
+center
+    div(class="ui-body ui-body-b")
+        div(style="font-size:20px; margin: 20px 0 10px 0") Your paycheck hasn't arrived yet! :(
+        div(style="font-size:10px;") Try back later!
+-} else {
+center
+    div(style="font-size:20px; margin: 20px 0 10px 0") Your paycheck has arrived!
+div(style="position:relative")
+    center
+        img(src="/images/check_200x120.png", style="opacity: 0.4")
+        div(style="position:absolute; top: 23px; margin-left: 3px; width: 100%;")
+            span(style="color: #000; font-size: 60px;", class="white_stroke")$#{user.check_amount}
+        div(style="position:absolute; top: 20px; width: 100%;")
+            span(style="color: #fff; font-size: 60px;", class="white_stroke")$#{user.check_amount}
 form(action="/bank/cash_check", method="post", data-ajax="false")
    input(type="submit", value="Cash Check", data-theme="e")
-
-div Check Amount: $#{user.check_amount}
+- }

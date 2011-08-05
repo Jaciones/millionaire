@@ -38,6 +38,7 @@ img {margin-right: 10px;}
 /* Portfolio */
 .portfolio_badge { background: #fff; border: 3px solid #397D02; padding: 3px 10px 3px 10px;}
 .dropshadow_white {-moz-box-shadow: 0 0 15px #fff; -webkit-box-shadow: 0x 0px 15px #fff; box-shadow: 0px 0px 15px #fff; }
+.dropshadow_black {-moz-box-shadow: 0 0 10px #000; -webkit-box-shadow: 0x 0px 10px #000; box-shadow: 0px 0px 10px #000; }
 .fs_icon_holder { height: 128px; width: 128px; display: inline-block; background:transparent url('/images/pathing.png') no-repeat scroll left top;}
 .fs_icon_holder img{ margin: 40px 49px;}
 .fs_icon_holder_sm { height: 64px; width: 64pxpx; display: inline-block; background:transparent url('/images/pathing.png') no-repeat scroll left top;}

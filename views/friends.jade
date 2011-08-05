@@ -1,9 +1,9 @@
 ul(data-role="listview")
    - friends.forEach(function(friend){
    li
-      a(href="/friend")
+      a(href="/friend_venues/#{friend.user_id}")
          div(class="")
             img(src="#{profile_photos[friend.foursquare_id]}", class="small_user")
-            div(style="display:inline-block;font-family: mill;padding-left: 10px") #{friend.first_name + " " + friend.last_name}
+            div(style="display:inline-block;padding-left: 10px") #{friend.first_name + " " + friend.last_name}
             span(class="net_worth rounded") #{friend.formatted_net_worth()}
    - })

@@ -39,3 +39,19 @@ app.post('/venue/:venue_id/buy_multiplier', function(req, res) {
         });
     });
 });
+
+app.get('/venue_friend/:friend_id/venue/:venue_id', function(req, res) {
+   var user_id = LocalUtils.getCookie('friend_id', req);
+   var venue_id = req.params.venue_id;
+   var multipliers = MultiplierTypes.getAvailable();
+
+   User.executeOnUser(user_id, function(user) {
+      var venue = user.findVenueInPurchased(venue_id);
+        res.render('venue', {
+            user: user,
+            venue: venue,
+            facebookPostUrl: null,
+            multipliers: multipliers
+        });
+   });
+});
