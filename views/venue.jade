@@ -1,37 +1,50 @@
+mixin show_active_mults(multipliers)
+    div(class="ui-body-e rounded")
+        - multipliers.forEach(function(v_multi){
+        div(style="padding-left: 10px")
+            img(src='#{v_multi.photo + "_32x32.png"}', class="small_photo")
+            span(class="green_border") #{v_multi.mini_desc}
+        - })
+
+mixin show_available_mults(owned_mults)
+    -if (owned_mults.length < 2) {
+    div
+        div(data-role="collapsible", data-theme="a", data-collapsed="true")
+            h1 Buy Enhancements
+            p You can add custom items to your properties. These items can add value to you property and increase you daily paycheck!
+            - multipliers.forEach(function(mult) {
+            div(data-role="collapsible", data-collapsed="true")
+                h3 
+                    img(src='#{mult.photo + "_32x32.png"}', class="small_photo")
+                    #{mult.name} ($#{mult.cost})
+                div
+                    img(src='#{mult.photo + "_64x64.png"}', class="big_photo")
+                    span(class="green_border rounded") 
+                         #{mult.mini_desc}
+                    div(class="generic_text") #{mult.desc}
+                        - if (mult.id==="facebook_shop") {
+                            a(href="#{facebookPostUrl}", data-role="button", class="inline_button") Post to Facebook
+                        - }else if (mult.id==="twitter_shop") {
+                            a(href="#{twitterPostUrl}, data-role="button") Post to Twitter
+                        - }else {
+                             form(action="/venue/#{venue.venue.id}/buy_multiplier", method="post", data-ajax="false")
+                                input(type="hidden", value="#{mult.id}", name="mult_id")
+                                input(type="submit", value="Purchase for $#{mult.cost}")                
+                        - }
+                
+            - })
+    - }
+
 div(class="ui-body ui-body-b")
     center
-      div(style="font-family: mill;") #{venue.venue.name}
-      div(class="fs_icon_holder")
-         img(src="#{venue.venue.categories[0].icon}", class="dropshadow_white")
-      div(class="venue_info")
-        div(class="big_money")
-            span Rent: $#{Venue.profitValue(venue)}
-        div(class="ui-body-e rounded")
-            - var v_multipliers = venue.multipliers || [];
-            - v_multipliers.forEach(function(v_multi){
-            div(style="padding-left: 10px")
-                img(src='#{v_multi.photo + "_32x32.png"}', class="small_photo")
-                span(class="green_border") #{v_multi.mini_desc}
-            - })
-    div(style="width:250px;")
-        - multipliers.forEach(function(mult) {
-        div(data-role="collapsible", data-collapsed="true")
-           h3 
-              img(src='#{mult.photo + "_32x32.png"}', class="small_photo")
-              #{mult.name} ($#{mult.cost})
-           div
-              img(src='#{mult.photo + "_64x64.png"}', class="big_photo")
-              span(class="green_border rounded") 
-                 #{mult.mini_desc}
-              div(class="generic_text") #{mult.desc}
-                - if (mult.id==="facebook_shop") {
-                    a(href="#{facebookPostUrl}", data-role="button", class="inline_button") Post to Facebook
-                - }else if (mult.id==="twitter_shop") {
-                    a(href="#{twitterPostUrl}, data-role="button") Post to Twitter
-                - }else {
-                     form(action="/venue/#{venue.venue.id}/buy_multiplier", method="post", data-ajax="false")
-                        input(type="hidden", value="#{mult.id}", name="mult_id")
-                        input(type="submit", value="Purchase for $#{mult.cost}")                
-                - }
-                
-        - })
+        div(style="font-family: mill;") #{venue.venue.name}
+        div(class="fs_icon_holder")
+            img(src="#{venue.venue.categories[0].icon}", class="dropshadow_white")
+        div(class="venue_info")
+            div(class="big_money")
+                span Rent: $#{Venue.profitValue(venue)}
+                - var v_multipliers = venue.multipliers || [];
+            - if (v_multipliers.length > 0) {
+            mixin show_active_mults(v_multipliers)
+            - }
+        mixin show_available_mults(v_multipliers)
