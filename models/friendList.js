@@ -34,11 +34,8 @@ FriendList.updateFriendsForUserAsNecessary = function(user, callback) {
 /* Used to create users from friends, no callback, fire and forget */
 FriendList.updateUserAsNecessary = function(friend) {
    User.executeOnUser(friend.id, function(user) {
-      console.log("Friend", friend.id, user);
-
       if (!user) {
          var newUser = new User();
-         console.log("freind", friend);
          newUser.foursquare_id = friend.id;
          newUser.first_name = friend.firstName;
          newUser.last_name = friend.lastName;
@@ -48,7 +45,6 @@ FriendList.updateUserAsNecessary = function(friend) {
             }
          });
       }else {
-         console.log("here",user);
          user.net_worth = user.getNetWorth();
          user.save(function(error) {
             if (error) {

@@ -41,7 +41,7 @@ app.post('/venue/:venue_id/buy_multiplier', function(req, res) {
 });
 
 app.get('/venue_friend/:friend_id/venue/:venue_id', function(req, res) {
-   var user_id = LocalUtils.getCookie('friend_id', req);
+   var user_id = req.params.friend_id;
    var venue_id = req.params.venue_id;
    var multipliers = MultiplierTypes.getAvailable();
 

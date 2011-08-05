@@ -1,7 +1,7 @@
 ul(data-role="listview")
    - friends.forEach(function(friend){
    li
-      a(href="/friend_venues/#{friend.user_id}")
+      a(href="/portfolio_friends/#{friend.foursquare_id}")
          div(class="")
             img(src="#{profile_photos[friend.foursquare_id]}", class="small_user")
             div(style="display:inline-block;padding-left: 10px") #{friend.first_name + " " + friend.last_name}
