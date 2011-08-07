@@ -9,10 +9,13 @@ a {color: #00B7FF; vertical-align: middle;}
 img { vertical-align: middle; }
 span {vertical-align: middle;}
 .green {color: #7B9344;}
+.hide { display: none;}
 .red {color: #aa0000;}
+.yellow {color: #ffb80b;}
+.grey {color: #aaa;}
 .small_photo { width: 32px; height: 32px;}
 .big_photo { width: 64px; height: 64px;}
-
+.white_back { background: white; color: black;}
 .ui-icon-fourquare {background:transparent url('/images/foursquare_small.png') no-repeat scroll left top;width: 34px; height: 34px;}
 
 .title { -webkit-text-stroke: 2px #082704;font-size: 30px; color: #ffb80b}

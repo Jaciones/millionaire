@@ -1,56 +1,35 @@
 var LocalUtils = require('../helpers/utils');
 
 app.get('/buy', function(req, res) {
-   var user_id = LocalUtils.getCookie('user_id', req);
-   User.executeOnUser(user_id, function(user) {
-      getVenuesAsNecessary(user, function(venues, err) {
-         res.render('buy', {
+    var user_id = LocalUtils.getCookie('user_id', req);
+
+    VenueList.getOrCreateVenueListForUser(user_id, function(venueList) {
+        res.render('buy', {
             layout: false,
-            venues: venues
-         });
-      });
-   });
+            venues: venueList.data
+        });
+    });
+
 });
 
 app.post('/buy/venue', function(req, res) {
-   var user_id = LocalUtils.getCookie('user_id', req);
-   var venue_id = req.body.venue_id;
-   console.log("buying", user_id);
+    var user_id = LocalUtils.getCookie('user_id', req);
+    var venue_id = req.body.venue_id;
 
-   User.executeOnUser(user_id, function(user) {
-      user.purchaseVenue(venue_id);
-      user.save(function(err) {
-         if (err) {
-            LocalUtils.throwError(err);
-            return;
-         }
-         res.writeHead(303, {
-            "location": "/portfolio"
-         });
-         res.end();
-      });
-
-   });
+    User.executeOnUser(user_id, function(user) {
+        user.purchaseVenue(venue_id, function() {
+            console.log("Saving user", user.purchased_venues);
+            user.save(function(err) {
+                if (err) {
+                    LocalUtils.throwError(err);
+                    return;
+                }
+                res.writeHead(303, {
+                    "location": "/portfolio"
+                });
+                res.end();
+            });
+        });
+    });
 
 });
-
-function getVenuesAsNecessary(user, callback) {
-   if (user.venues_last_updated && Date.today() > user.venues_last_updated) {
-      callback(user.venues);
-      return;
-   }
-   console.log("Getting all Venues");
-
-   Venue.getAllAvailableForUser(user.access_token, function(err, venues) {
-      if (err) {
-         callback(null, err);
-      }
-      else {
-         user.venues = venues;
-         user.venues_last_updated = new Date();
-         user.save(function(err) {
-            callback(user.venues, err);
-         });
-      }
-   });
-}

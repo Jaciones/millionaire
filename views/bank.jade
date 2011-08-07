@@ -1,8 +1,12 @@
 -if (user.check_amount == 0) {
 center
-    div(class="ui-body ui-body-b")
-        div(style="font-size:20px; margin: 20px 0 10px 0") Your next paycheck hasn't arrived yet! :(
-        a(data-rel="back", data-role="button", data-theme="a", data-icon="arrow-l", data-inline="true") Back
+    div(class="white_back rounded")
+        br
+        div(style="font-size:20px; margin: 20px 0 10px 0", class="yellow") Waiting for next paycheck...
+        img(src="/images/scenery1_200x68.png")
+        div
+            a(href="/home", data-ajax="false", data-role="button", data-theme="a", data-icon="arrow-l", data-inline="true") Home
+        br
 -} else {
 center
     div(style="font-size:20px; margin: 20px 0 10px 0") Your paycheck has arrived!

@@ -39,6 +39,7 @@ FriendList.updateUserAsNecessary = function(friend) {
          newUser.foursquare_id = friend.id;
          newUser.first_name = friend.firstName;
          newUser.last_name = friend.lastName;
+         newUser.photo_url = friend.photo;
          newUser.save(function(saveError) {
             if (saveError) {
                LocalUtils.throwError(saveError);
@@ -46,6 +47,9 @@ FriendList.updateUserAsNecessary = function(friend) {
          });
       }else {
          user.net_worth = user.getNetWorth();
+         user.photo_url = friend.photo;
+         user.first_name = friend.firstName;
+         user.last_name = friend.lastName;
          user.save(function(error) {
             if (error) {
                LocalUtils.throwError(error);

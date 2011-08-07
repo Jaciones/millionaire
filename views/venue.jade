@@ -7,7 +7,7 @@ mixin show_active_mults(multipliers)
         - })
 
 mixin show_available_mults(owned_mults)
-    -if (owned_mults.length < 2) {
+    -if (owned_mults.length < 2 && isSelf) {
     div
         div(data-role="collapsible", data-theme="a", data-collapsed="true")
             h1 Buy Enhancements
