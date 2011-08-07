@@ -4,9 +4,20 @@ app.get('/buy', function(req, res) {
     var user_id = LocalUtils.getCookie('user_id', req);
 
     VenueList.getOrCreateVenueListForUser(user_id, function(venueList) {
-        res.render('buy', {
-            layout: false,
-            venues: venueList.data
+        User.executeOnUser(user_id, function(user) {
+            var availableVenues = [];
+            
+            venueList.data.forEach(function(venue) {
+                console.log("here", venue);
+                if (!user.findVenueInPurchased(venue.venue.id)) {
+                    availableVenues.push(venue);
+                }
+            });
+            
+            res.render('buy', {
+                layout: false,
+                venues: availableVenues
+            });
         });
     });
 

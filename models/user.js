@@ -59,7 +59,7 @@ User.prototype.findVenue = function(venue_id, callback) {
             }
         }
         console.log("Error trying to find ", venue_id);
-        callback(null);        
+        callback(null);
     });
 };
 
@@ -87,7 +87,7 @@ User.prototype.setCheckAmount = function() {
 };
 
 User.prototype.fullName = function() {
-    return this.first_name + " " + this.last_name;    
+    return this.first_name + " " + this.last_name;
 };
 
 User.prototype.getNetWorth = function() {
