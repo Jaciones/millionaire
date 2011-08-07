@@ -5,6 +5,7 @@
 
 body {  }
 
+.center { text-align: center;}
 a {color: #00B7FF; vertical-align: middle;}
 img { vertical-align: middle; }
 span {vertical-align: middle;}

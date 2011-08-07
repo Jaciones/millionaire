@@ -1,14 +1,17 @@
 var LocalUtils = require('../helpers/utils');
 
 app.get('/home', function(req, res) {
-   var user_id = LocalUtils.getCookie('user_id', req);
+	var user_id = LocalUtils.getCookie('user_id', req);
 
-   User.executeOnUser(user_id, function(user) {
-      var bankNotify = Date.now() > user.next_check_issue_date ? "notice yellow" : "hide";
-      res.render('home', {
-         user: user,
-         bank_notice : bankNotify,
-         javascripts : ["/javascripts/home.js?234223"]
-      });
-   });
+	var justCashed = (req.params.cashed==='true');
+
+	User.executeOnUser(user_id, function(user) {
+		var bankNotify = Date.now() > user.next_check_issue_date ? "notice yellow" : "hide";
+		res.render('home', {
+			user: user,
+			bank_notice : bankNotify,
+			'justCashed' : justCashed,
+			javascripts : ["/javascripts/home.js?234223"]
+		});
+	});
 });

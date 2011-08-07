@@ -11,16 +11,8 @@ app.post('/bank/cash_check', function(req, res) {
             return;
         }
         cashCheck(user, function() {
-            res.writeHead(303, {
-                "location": "/bank"
-            });
+			res.redirect("/home?cashed=true");
         });
-    });
-});
-
-app.get('/bank/cash_check', function(req, res) {
-    res.writeHead(303, {
-        "location": "/home"
     });
 });
 

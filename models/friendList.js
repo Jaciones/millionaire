@@ -16,7 +16,7 @@ FriendList.updateFriendsForUserAsNecessary = function(user, callback) {
    FriendList.executeOnFriendList(user.foursquare_id, function(friendList) {
       if (friendList) {
          // Found friend list, update it if date has expired
-         if (friendList.next_update_date > new Date() || true) {
+         if (friendList.next_update_date > new Date()) {
             FriendList.setFriendsForUser(user, function(friendList) {
                callback(friendList);
             });
