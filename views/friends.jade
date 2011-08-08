@@ -3,7 +3,7 @@ ul(data-role="listview")
    li
       a(href="/portfolio_friends/#{friend.foursquare_id}")
          div(class="")
-            img(src="#{profile_photos[friend.foursquare_id]}", class="small_user")
+            img(src="#{friend.photo_url}", class="small_user")
             div(style="display:inline-block;padding-left: 10px") #{friend.first_name + " " + friend.last_name}
             span(class="net_worth rounded") #{friend.formatted_net_worth()}
    - })

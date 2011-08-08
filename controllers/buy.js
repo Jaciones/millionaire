@@ -8,7 +8,6 @@ app.get('/buy', function(req, res) {
             var availableVenues = [];
             
             venueList.data.forEach(function(venue) {
-                console.log("here", venue);
                 if (!user.findVenueInPurchased(venue.venue.id)) {
                     availableVenues.push(venue);
                 }
@@ -28,6 +27,7 @@ app.post('/buy/venue', function(req, res) {
     var venue_id = req.body.venue_id;
 
     User.executeOnUser(user_id, function(user) {
+        console.log("Found user", user.id);
         user.purchaseVenue(venue_id, function() {
             console.log("Saving user", user.purchased_venues);
             user.save(function(err) {

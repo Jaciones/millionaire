@@ -1,7 +1,7 @@
 ul(data-role="listview")
    - venues.forEach(function(venue){
    li(data-iconsize="44")
-      a(href="/venue/#{user.foursquare_id}/#{venue.venue.id}",data-ajax="false" )
+      a(href="/venue/#{user.id}/#{venue.venue.id}",data-ajax="false" )
          div(style="width:200px;")
             div(class="fs_icon_holder_sm")
                img(src="#{venue.venue.categories[0].icon}", class="dropshadow_white")

@@ -2,16 +2,9 @@ var LocalUtils = require('../helpers/utils');
 
 app.post('/bank/cash_check', function(req, res) {
     var user_id = LocalUtils.getCookie('user_id', req);
-
-    User.findOne({
-        'foursquare_id': user_id
-    }, function(err, user) {
-        if (err) {
-            LocalUtils.throwError(err);
-            return;
-        }
+    User.executeOnUser(user_id, function(user) {
         cashCheck(user, function() {
-			res.redirect("/home?cashed=true");
+            res.redirect("/home?cashed=true");
         });
     });
 });

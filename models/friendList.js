@@ -13,7 +13,7 @@ FriendList.executeOnFriendList = function(user_id, callback) {
 };
 
 FriendList.updateFriendsForUserAsNecessary = function(user, callback) {
-   FriendList.executeOnFriendList(user.foursquare_id, function(friendList) {
+   FriendList.executeOnFriendList(user.id, function(friendList) {
       if (friendList) {
          // Found friend list, update it if date has expired
          if (friendList.next_update_date > new Date()) {
@@ -33,7 +33,7 @@ FriendList.updateFriendsForUserAsNecessary = function(user, callback) {
 
 /* Used to create users from friends, no callback, fire and forget */
 FriendList.updateUserAsNecessary = function(friend) {
-   User.executeOnUser(friend.id, function(user) {
+   User.executeOnUserFoursquareId(friend.id, function(user) {
       if (!user) {
          var newUser = new User();
          newUser.foursquare_id = friend.id;
@@ -61,11 +61,9 @@ FriendList.updateUserAsNecessary = function(friend) {
 
 FriendList.prototype.getFriendsAsUsers = function(callback) {
    var friendIds = [];
-   var photos = {};
    
    this.friends.forEach(function(friend){
-      friendIds.push(friend.id);
-      photos[friend.id] = friend.photo;
+      friendIds.push(friend.id); // pushing foursquare id
    });
    
    User.find({ foursquare_id : { $in : friendIds}}, function(err, results) {
@@ -73,7 +71,7 @@ FriendList.prototype.getFriendsAsUsers = function(callback) {
          LocalUtils.throwError(err);
          return;
       }
-      callback({ 'photos':photos, users: results});
+      callback({ users: results});
    });
 };
 
@@ -85,10 +83,10 @@ FriendList.setFriendsForUser = function(user, callback) {
          return;
       }
       else {
-         FriendList.executeOnFriendList(user.foursquare_id, function(friendList) {
+         FriendList.executeOnFriendList(user.id, function(friendList) {
             if (!friendList) {
                var newFriendList = new FriendList();
-               newFriendList.user_id = user.foursquare_id;
+               newFriendList.user_id = user.id;
                friendList = newFriendList;
             }
             friendList.friends = friends.friends.items;

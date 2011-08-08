@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
+
 mongoose.connect("mongodb:jaciones:ha7141@dbh23.mongolab.com:27237/jaciones");
-Schema = mongoose.Schema;
+var Schema = mongoose.Schema;
 
 function validatePresenceOf(value) {
     return value && value.length;

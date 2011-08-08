@@ -1,6 +1,19 @@
 User.executeOnUser = function(user_id, func) {
+    console.log("User_Id", user_id);
     User.findOne({
-        'foursquare_id': user_id
+        _id: user_id
+    }, function(err, user) {
+        if (err) {
+            LocalUtils.throwError(err);
+            return;
+        }
+        func(user);
+    });
+};
+
+User.executeOnUserFoursquareId = function(foursquare_id, func) {
+    User.findOne({
+        foursquare_id: foursquare_id
     }, function(err, user) {
         if (err) {
             LocalUtils.throwError(err);
@@ -13,7 +26,7 @@ User.executeOnUser = function(user_id, func) {
 User.prototype.purchaseVenue = function(venue_id, callback) {
     var _this = this;
     this.findVenue(venue_id, function(requested_venue) {
-        if (_this.bank_balance > requested_venue.value) {
+        if (_this.bank_balance >= requested_venue.value) {
             if (!_this.findVenueInPurchased(venue_id)) {
                 _this.bank_balance = _this.bank_balance - requested_venue.value;
                 _this.purchased_venues.push(requested_venue);
@@ -49,7 +62,7 @@ User.prototype.formatted_net_worth = function() {
 };
 
 User.prototype.findVenue = function(venue_id, callback) {
-    VenueList.getOrCreateVenueListForUser(this.foursquare_id, function(venueList) {
+    VenueList.getOrCreateVenueListForUser(this.id, function(venueList) {
         var length = venueList.data.length;
         for (var i = 0; i < length; i++) {
             var venue = venueList.data[i];
@@ -123,7 +136,8 @@ User.login = function(accessToken, callback) {
             foursquare_user = foursquare_user.user;
             var foursquare_id = foursquare_user.id;
             console.log("Foursquare User", foursquare_user);
-            User.executeOnUser(foursquare_id, function(user) {
+            
+User.executeOnUserFoursquareId(foursquare_id, function(user) {
                 console.log("Found user");
                 var newUser = user ? user : new User();
                 newUser.foursquare_id = foursquare_user.id;
@@ -136,7 +150,7 @@ User.login = function(accessToken, callback) {
                         LocalUtils.throwError(saveError);
                     }
                     FriendList.setFriendsForUser(newUser, function(friendList) {
-                        callback(foursquare_id);
+                        callback(newUser.id);
                     });
                     return;
                 });

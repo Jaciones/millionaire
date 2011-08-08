@@ -9,9 +9,9 @@ app.get('/portfolio', function(req, res) {
     });
 });
 
-app.get('/portfolio_friends/:friend_id', function(req, res) {
-    var user_id = req.params.friend_id;
-    User.executeOnUser(user_id, function(user) {
+app.get('/portfolio_friends/:friend_foursqure_id', function(req, res) {
+    var foursquare_id = req.params.friend_foursqure_id;
+    User.executeOnUserFoursquareId(foursquare_id, function(user) {
         res.render('portfolio', {
             user: user,
             venues: user.purchased_venues
