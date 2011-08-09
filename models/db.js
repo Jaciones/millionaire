@@ -7,6 +7,19 @@ function validatePresenceOf(value) {
     return value && value.length;
 }
 
+NotificationSchema = new Schema({
+    'user_id': {
+        type: String,
+        validate: [validatePresenceOf, 'UserID is required'],
+        index: true
+    },
+    'created_at' : { type: Date, 'default': Date.now },
+    'description' : String,
+    'is_read' : { type: Boolean, 'default':false},
+    'data': Array
+});
+Notification = mongoose.model('Notification', NotificationSchema);
+
 VenueListSchema = new Schema({
     'user_id': {
         type: String,
@@ -104,6 +117,7 @@ FriendList = mongoose.model('FriendList', FriendListSchema);
 Venue = VenueSchema;
 require('../models/venueList');
 require('../models/venue');
+//require('../models/notification');
 require('../models/user');
 require('../models/purchasedVenue');
 require('../models/friendList');

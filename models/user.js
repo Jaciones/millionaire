@@ -115,15 +115,19 @@ User.prototype.getNetWorth = function() {
     return newWorth;
 };
 
-User.prototype.calculateVenueProfits = function() {
+User.prototype.calculateVenueProfits = function(callback) {
     var length = this.purchased_venues.length;
     var profits = 0;
 
     for (var i = 0; i < length; i++) {
         var venue = this.purchased_venues[i];
         profits += Venue.profitValue(venue);
+        var multLength = venue.multipliers ? venue.multipliers.length : 0;
+        for(var j = 0; j < multLength; j++) {
+           profits += venue.multipliers[j].type.func(venue, this);             
+        }
     }
-    return profits;
+    callback(profits);
 };
 
 User.login = function(accessToken, callback) {
