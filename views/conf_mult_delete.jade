@@ -1,0 +1,13 @@
+div(data-role="page", id="confirm", data-add-back-btn="true")
+    div(data-role="header", data-position="inline")
+        h1 Delete?
+    div(data-role="content")
+        center
+            h1 Are you sure you want to remove the #{multiplier.name}?
+            img(src='#{multiplier.photo + "_64x64.png"}', class="big_photo")
+            form(action="/venue/delete_mult", method="post")
+                input(type="hidden", name="mult_type", value="#{mult_type}")
+                input(type="hidden", name="venue_id", value="#{venue_id}")
+                input(type="submit", value="Yes")
+
+            a(href="#", data-role="button", data-rel="back") Cancel

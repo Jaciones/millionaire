@@ -12,13 +12,16 @@ User.executeOnUser = function(user_id, func) {
 };
 
 User.executeOnUserFoursquareId = function(foursquare_id, func) {
+    console.log("executeOnUserFoursquareId", foursquare_id);
     User.findOne({
-        foursquare_id: foursquare_id
+        'foursquare_id': foursquare_id
     }, function(err, user) {
+        console.log("bakc", user);
         if (err) {
             LocalUtils.throwError(err);
             return;
         }
+        console.log("found", user);
         func(user);
     });
 };
@@ -85,17 +88,20 @@ User.prototype.findVenueInPurchased = function(venue_id) {
     return null;
 };
 
-User.prototype.setCheckAmount = function() {
+User.prototype.setCheckAmount = function(callback) {
     var targetTime = Date.now();
 
     if (this.next_check_issue_date) {
         if (targetTime > this.next_check_issue_date) {
             this.check_amount = this.salary;
-            this.check_amount += this.calculateVenueProfits();
+            this.check_amount += this.calculateVenueProfits(function() {
+                callback();    
+            });
         }
     }
     else {
         this.check_amount = this.salary;
+        callback();
     }
 };
 
@@ -123,8 +129,8 @@ User.prototype.calculateVenueProfits = function(callback) {
         var venue = this.purchased_venues[i];
         profits += Venue.profitValue(venue);
         var multLength = venue.multipliers ? venue.multipliers.length : 0;
-        for(var j = 0; j < multLength; j++) {
-           profits += venue.multipliers[j].type.func(venue, this);             
+        for (var j = 0; j < multLength; j++) {
+            profits += venue.multipliers[j].func(venue, this);
         }
     }
     callback(profits);
@@ -140,8 +146,8 @@ User.login = function(accessToken, callback) {
             foursquare_user = foursquare_user.user;
             var foursquare_id = foursquare_user.id;
             console.log("Foursquare User", foursquare_user);
-            
-User.executeOnUserFoursquareId(foursquare_id, function(user) {
+
+            User.executeOnUserFoursquareId(foursquare_id, function(user) {
                 console.log("Found user");
                 var newUser = user ? user : new User();
                 newUser.foursquare_id = foursquare_user.id;

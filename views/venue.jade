@@ -1,9 +1,10 @@
-mixin show_active_mults(multipliers)
+mixin show_active_mults(venue, multipliers)
     div(class="ui-body-e rounded")
         - multipliers.forEach(function(v_multi){
-        div(style="padding-left: 10px")
+        div
             img(src='#{v_multi.photo + "_32x32.png"}', class="small_photo")
             span(class="green_border") #{v_multi.mini_desc}
+            a(href="/venue/delete/#{venue.id}/mult/#{v_multi.id}", data-rel="dialog", data-role="button", data-icon="delete", data-iconpos="notext", data-inline="true")
         - })
 
 mixin show_available_mults(owned_mults)
@@ -25,7 +26,7 @@ mixin show_available_mults(owned_mults)
                         - if (mult.id==="facebook_shop") {
                             a(href="#{facebookPostUrl}", data-role="button", class="inline_button") Post to Facebook
                         - }else if (mult.id==="twitter_shop") {
-                            a(href="#{twitterPostUrl}, data-role="button") Post to Twitter
+                            a(href="#", data-role="button") Post to Twitter
                         - }else {
                              form(action="/venue/#{venue.venue.id}/buy_multiplier", method="post", data-ajax="false")
                                 input(type="hidden", value="#{mult.id}", name="mult_id")
@@ -45,6 +46,8 @@ div(class="ui-body ui-body-b")
                 span Rent: $#{Venue.profitValue(venue)}
                 - var v_multipliers = venue.multipliers || [];
             - if (v_multipliers.length > 0) {
-            mixin show_active_mults(v_multipliers)
+            mixin show_active_mults(venue.venue, v_multipliers)
             - }
         mixin show_available_mults(v_multipliers)
+
+ 

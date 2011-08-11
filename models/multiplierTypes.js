@@ -113,7 +113,8 @@ MultiplierTypes = {
                 desc: m.desc,
                 mini_desc: m.mini_desc,
                 photo: m.photo,
-                cost: m.cost
+                cost: m.cost,
+                func : m.func
             });
         });
         return result;

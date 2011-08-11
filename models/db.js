@@ -117,6 +117,7 @@ FriendList = mongoose.model('FriendList', FriendListSchema);
 Venue = VenueSchema;
 require('../models/venueList');
 require('../models/venue');
+require('../models/multiplier');
 //require('../models/notification');
 require('../models/user');
 require('../models/purchasedVenue');

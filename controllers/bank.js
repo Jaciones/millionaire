@@ -37,12 +37,13 @@ function cashCheck(user, callback) {
 }
 
 function setCheckAmount(user, callback) {
-    user.setCheckAmount();
-    user.save(function(err) {
-        if (err) {
-            LocalUtils.throwError(err);
-            return;
-        }
-        callback();
+    user.setCheckAmount(function() {
+        user.save(function(err) {
+            if (err) {
+                LocalUtils.throwError(err);
+                return;
+            }
+            callback();
+        });
     });
 }

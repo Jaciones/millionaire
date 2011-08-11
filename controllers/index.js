@@ -42,7 +42,9 @@ app.get('/callback', function(req, res) {
             res.send("An error was thrown: " + error.message);
         }
         else {
+            console.log("Pre-Login");
             User.login(accessToken, function(user_id) {
+                console.log("Login");
                 redirectHome(user_id, res);
             });
         }

@@ -17,7 +17,7 @@ app.get('/venue/:user_id/:venue_id', function(req, res) {
             venue: venue,
             facebookPostUrl: facebookPostUrl,
             multipliers: multipliers,
-            isSelf : isSelf
+            isSelf: isSelf
         });
     });
 });
@@ -34,9 +34,6 @@ app.post('/venue/:venue_id/buy_multiplier', function(req, res) {
                 LocalUtils.throwError(err);
                 return;
             }
-            user.purchased_venues.forEach(function(venue) {
-                console.log("foo", venue);
-            });
             res.writeHead(303, {
                 "location": "/portfolio"
             });
@@ -59,4 +56,35 @@ app.get('/venue_friend/:friend_id/venue/:venue_id', function(req, res) {
             multipliers: multipliers
         });
     });
+});
+
+app.get('/venue/delete/:venue_id/mult/:mult_type', function(req, res) {
+    var mult_type = req.params.mult_type;
+    var venue_id = req.params.venue_id;
+    var multiplier = MultiplierTypes.findMultiplier(mult_type);
+
+    res.render('conf_mult_delete', {
+        layout: "layout_simple",
+        venue_id: venue_id,
+        mult_type: mult_type,
+        multiplier: multiplier
+    });
+});
+
+app.post('/venue/delete_mult', function(req, res) {
+    var user_id = LocalUtils.getCookie('user_id', req);
+    var venue_id = req.body.venue_id;
+    var mult_type = req.body.mult_type;
+    User.executeOnUser(user_id, function(user) {
+        Multiplier.removeFromVenue(user, venue_id, mult_type);
+        console.log("User", user);
+        user.save(function(err) {
+            if (err) {
+                LocalUtils.throwError(err);
+                return;
+            }
+            res.redirect("/venue/"+user.id+"/"+venue_id);
+        });
+    });
+
 });
