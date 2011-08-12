@@ -9,7 +9,7 @@ app.get('/home', function(req, res) {
       res.render('home', {
          user: user,
          bank_notice : bankNotify,
-         just_cached : justCashed,
+         just_cashed : justCashed,
          javascripts : ["/javascripts/home.js?234223"]
       });
    });

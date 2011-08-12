@@ -1,46 +1,65 @@
 !!! 5
 html(lang="en")
-   head
-      title My Site
-      <meta name="viewport" content="width=device-width, initial-scale=1"> 
-      script(src='http://code.jquery.com/jquery-1.6.1.min.js')
-      script(src='http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.js')
-      link(rel='stylesheet', href='http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.css')
-      link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-   div(data-role = "page", id = "foo")
-      div(data-role = "header")
-            center
-               div(class="header_box")
-                  div(class="sub_head")
-                     div(style="font-family: mill;", class="title") Fourmillionaire
+	head
+			title My Site
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			script(src='http://code.jquery.com/jquery-1.6.1.min.js')
+			script(src='http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.js')
+			link(rel='stylesheet', href='http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.css')
+			link(rel='stylesheet', href='/stylesheets/style.css')
+	body
+	div(data-role = "page", id = "foo")
+		div(data-role = "header")
+					center
+						div(class="header_box")
+								div(class="sub_head")
+									div(style="font-family: mill;", class="title") Fourmillionaire
 
-      div(data-role = "content")
-         ul(data-role="listview")
-            - venues.forEach(function(venue){
-            li(data-iconsize="44")
-               a(href="##{venue.venue.id}")
-                  img(src="#{venue.venue.categories[0].icon}", class="ui-li-icon", style="height:16px;width:16px;") 
-                  span(class="green")
-                     $#{venue.value}&nbsp;
-                  span
-                     #{venue.venue.name}
-            - })
-   - venues.forEach(function(venue){
-   div(id="#{venue.venue.id}", data-role = "page",data-add-back-btn="true")
-      div(data-role = "header")
-         h1 #{venue.venue.name}
-      div(data-role = "content")
-         div(class="ui-body ui-body-b")
-            center
-               div(class="green", style="font-size: 24px; font-weight: bold") $#{venue.value}
-               div(class="fs_icon_holder")
-                  img(src="#{venue.venue.categories[0].icon}", class="dropshadow_white")
-               div
-                  #{venue.venue.location.address} #{venue.venue.location.crossStreet}, #{venue.venue.location.city} #{venue.venue.location.state}
-               div
-                  form(action="buy/venue", method="post", data-ajax="false")
-                     input(type="hidden", value="#{venue.venue.id}", name="venue_id")
-                     input(type="submit", value="Purchase for $#{venue.value}")
+		div(data-role = "content")
+			ul(data-role="listview")
+					- venues.forEach(function(venue){
+					li(data-iconsize="44")
+						a(href="##{venue.venue.id}")
+								img(src="#{venue.venue.categories[0].icon}", class="ui-li-icon", style="height:16px;width:16px;")
+								span(class="green")
+									$#{venue.value}&nbsp;
+								span
+									#{venue.venue.name}
+					- })
 
-   - })      
+		div(data-role = "navbar", data-position="whole-screen", data-theme="a")
+			ul
+					li
+						a(href="/home",data-role="button", data-ajax="false", style="font-family: mill;", class="navbar_bottom")
+								img(src="/images/house.png")
+								div Home
+					li
+						a(href="/bank",data-role="button", data-ajax="false", style="font-family: mill;", class="navbar_bottom")
+								img(src="/images/briefcase.png")
+								div Bank
+					li
+						a(href="/buy",data-role="button", data-ajax="false", style="font-family: mill;", class="navbar_bottom", data-ajax="false")
+								img(src="/images/piggy.png")
+								div Buy
+					li
+						a(href="/friends",data-role="button", data-ajax="false", style="font-family: mill;", class="navbar_bottom")
+								img(src="/images/world.png")
+								div Friends
+
+	- venues.forEach(function(venue){
+	div(id="#{venue.venue.id}", data-role = "page",data-add-back-btn="true")
+			div(data-role = "header")
+				h1 #{venue.venue.name}
+			div(data-role = "content")
+				div(class="ui-body ui-body-b")
+						center
+							div(class="green", style="font-size: 24px; font-weight: bold") $#{venue.value}
+							div(class="fs_icon_holder")
+									img(src="#{venue.venue.categories[0].icon}", class="dropshadow_white")
+							div
+									#{venue.venue.location.address} #{venue.venue.location.crossStreet}, #{venue.venue.location.city} #{venue.venue.location.state}
+							div
+									form(action="buy/venue", method="post", data-ajax="false")
+										input(type="hidden", value="#{venue.venue.id}", name="venue_id")
+										input(type="submit", value="Purchase for $#{venue.value}")
+	- })

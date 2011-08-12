@@ -3,12 +3,13 @@ center
     div(class="white_back rounded")
         br
         div #{user.first_name + " " + user.last_name}
-        div Net Worth : #{data.net_worth}
+        div Net Worth :&nbsp;
+            span(class="rank")#{data.net_worth}
         div &nbsp;
         div(class="rank")
             span Rank:&nbsp;
             span #{data.rank.title}
-        img(src="#{data.rank.image}", style="margin-bottom: 20px")
+        img(src="#{data.rank.image}", style="margin-left: 12px; margin-bottom: 20px")
         br
 -} else {
 center

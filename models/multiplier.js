@@ -52,11 +52,7 @@ Multiplier.removeFromVenue = function(user, venue_id, mult_type) {
                 console.log("new_multipliers[i].id",new_multipliers[i].id, mult_type);
                 if (new_multipliers[i].id == mult_type) {
                     console.log("removing");
-                    if (new_multipliers.length == 1) {
-                        new_multipliers = [];
-                    } else {
-                        new_multipliers = new_multipliers.slice(i,1);
-                    }
+	                new_multipliers.splice(i,1);
                     break;
                 }
             }

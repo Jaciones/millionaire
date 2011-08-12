@@ -1,5 +1,4 @@
 User.executeOnUser = function(user_id, func) {
-    console.log("User_Id", user_id);
     User.findOne({
         _id: user_id
     }, function(err, user) {
@@ -12,7 +11,6 @@ User.executeOnUser = function(user_id, func) {
 };
 
 User.executeOnUserFoursquareId = function(foursquare_id, func) {
-    console.log("executeOnUserFoursquareId", foursquare_id);
     User.findOne({
         'foursquare_id': foursquare_id
     }, function(err, user) {
@@ -59,9 +57,9 @@ User.prototype.purchaseMultiplier = function(venue_id, mult_id) {
 };
 
 User.prototype.formatted_net_worth = function() {
-    if (!this.net_worth) return "$ 0.00";
+    if (!this.net_worth) return "$0.00";
 
-    return "$ " + parseFloat(this.net_worth).toString();
+    return "$" + parseFloat(this.net_worth).toString();
 };
 
 User.prototype.findVenue = function(venue_id, callback) {
@@ -90,17 +88,23 @@ User.prototype.findVenueInPurchased = function(venue_id) {
 
 User.prototype.setCheckAmount = function(callback) {
     var targetTime = Date.now();
-
-    if (this.next_check_issue_date) {
-        if (targetTime > this.next_check_issue_date) {
-            this.check_amount = this.salary;
-            this.check_amount += this.calculateVenueProfits(function() {
-                callback();    
+	var _this = this;
+    if (_this.next_check_issue_date) {
+        if (targetTime > _this.next_check_issue_date) {
+            _this.check_amount = _this.salary;
+            _this.calculateVenueProfits(function(profits) {
+	            _this.check_amount += profits;
+	            console.log("profits", _this.check_amount)
+                callback();
             });
+        }else {
+	        console.log("bail");
+	        callback();
         }
     }
     else {
-        this.check_amount = this.salary;
+	    console.log("default");
+        _this.check_amount = _this.salary;
         callback();
     }
 };
@@ -127,10 +131,11 @@ User.prototype.calculateVenueProfits = function(callback) {
 
     for (var i = 0; i < length; i++) {
         var venue = this.purchased_venues[i];
-        profits += Venue.profitValue(venue);
+        profits += Venue.rent(venue);
         var multLength = venue.multipliers ? venue.multipliers.length : 0;
         for (var j = 0; j < multLength; j++) {
-            profits += venue.multipliers[j].func(venue, this);
+	        var multiplier = MultiplierTypes.findMultiplier(venue.multipliers[j].id);
+            profits += multiplier.func(venue, this);
         }
     }
     callback(profits);

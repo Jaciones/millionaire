@@ -13,6 +13,6 @@ Venue.assignValue = function(venue) {
    }
 };
 
-Venue.profitValue = function(venue) {
+Venue.rent = function(venue) {
    return venue.value / 10;
 };
