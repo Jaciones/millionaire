@@ -14,8 +14,15 @@ app.get('/bank', function(req, res) {
 
     User.executeOnUser(user_id, function(user) {
         setCheckAmount(user, function() {
+            var data = {};
+            if (user.check_amount==0) {
+                data.net_worth = user.formatted_net_worth();
+                console.log("foo", Rank.getRankValue(user.net_worth));
+                data.rank = Rank.getRankValue(user.net_worth);
+            }
             res.render('bank', {
-                user: user
+                user: user,
+                data: data
             });
         });
     });

@@ -43,7 +43,7 @@ div(class="ui-body ui-body-b")
             img(src="#{venue.venue.categories[0].icon}", class="dropshadow_white")
         div(class="venue_info")
             div(class="big_money")
-                span Rent: $#{Venue.profitValue(venue)}
+                span Rent: $#{Venue.rent(venue)}
                 - var v_multipliers = venue.multipliers || [];
             - if (v_multipliers.length > 0) {
             mixin show_active_mults(venue.venue, v_multipliers)

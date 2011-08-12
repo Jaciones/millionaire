@@ -16,7 +16,8 @@ span {vertical-align: middle;}
 .grey {color: #aaa;}
 .small_photo { width: 32px; height: 32px;}
 .big_photo { width: 64px; height: 64px;}
-.white_back { background: white; color: black;}
+.rank { color: #444; }
+.white_back { background: white; color: #aaa; text-shadow: none;}
 .ui-icon-fourquare {background:transparent url('/images/foursquare_small.png') no-repeat scroll left top;width: 34px; height: 34px;}
 
 .title { -webkit-text-stroke: 2px #082704;font-size: 30px; color: #ffb80b}

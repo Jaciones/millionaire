@@ -13,6 +13,7 @@ NotificationSchema = new Schema({
         validate: [validatePresenceOf, 'UserID is required'],
         index: true
     },
+    'type' : String,
     'created_at' : { type: Date, 'default': Date.now },
     'description' : String,
     'is_read' : { type: Boolean, 'default':false},
@@ -118,7 +119,8 @@ Venue = VenueSchema;
 require('../models/venueList');
 require('../models/venue');
 require('../models/multiplier');
-//require('../models/notification');
+require('../models/rank');
+require('../models/notification');
 require('../models/user');
 require('../models/purchasedVenue');
 require('../models/friendList');

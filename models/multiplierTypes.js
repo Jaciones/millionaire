@@ -7,7 +7,7 @@ MultiplierTypes = {
         photo: '/images/mults/house0',
         cost: 100,
         func: function(venue, user) {
-            return venue.value * 0.05;
+            return Venue.rent(venue) * 0.05;
         }
     }, {
         id: 'house1',
@@ -17,7 +17,7 @@ MultiplierTypes = {
         photo: '/images/mults/house1',
         cost: 200,
         func: function(venue, user) {
-            return venue.value * 0.10;
+            return Venue.rent(venue) * 0.10;
         }
     }, {
         id: 'house2',
@@ -27,7 +27,7 @@ MultiplierTypes = {
         photo: '/images/mults/house2',
         cost: 500,
         func: function(venue, user) {
-            return venue.value * 0.15;
+            return Venue.rent(venue) * 0.15;
         }
     }, {
         id: 'house4',
@@ -37,7 +37,7 @@ MultiplierTypes = {
         photo: '/images/mults/mansion',
         cost: 10000,
         func: function(venue, user) {
-            return venue.value * 0.20;
+            return Venue.rent(venue) * 0.20;
         }
     }],
     buildings: [{
@@ -48,7 +48,7 @@ MultiplierTypes = {
         photo: '/images/mults/facebook',
         cost: 0,
         func: function(venue, user) {
-            return venue.value * 0.15;
+            return Venue.rent(venue) * 0.15;
         }
     }, {
         id: 'twitter_shop',
@@ -58,7 +58,7 @@ MultiplierTypes = {
         photo: '/images/mults/twitter',
         cost: 0,
         func: function(venue, user) {
-            return venue.value * 0.15;
+            return Venue.rent(venue) * 0.15;
         }
     }, {
         id: 'shop0',
@@ -114,7 +114,7 @@ MultiplierTypes = {
                 mini_desc: m.mini_desc,
                 photo: m.photo,
                 cost: m.cost,
-                func : m.func
+                func: m.func
             });
         });
         return result;
@@ -122,7 +122,7 @@ MultiplierTypes = {
     findMultiplier: function(id) {
         var all = MultiplierTypes.all();
         for (var i = 0; i < all.length; i++) {
-            if ( all[i].id == id) return all[i];
+            if (all[i].id == id) return all[i];
         }
     }
 };
