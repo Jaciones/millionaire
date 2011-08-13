@@ -75,23 +75,12 @@ UserSchema = new Schema({
         min: 200,
         'default': 200
     },
+	'pay_stub' : Array,
     'purchased_venues': Array,
     'net_worth': {
         type: Number
     },
-    'venues': Array,
-    'venues_last_updated': Date,
-    'level': {
-        type: Number,
-        min: 1,
-        max: 100,
-        'default': 1
-    },
-    'xp': {
-        type: Number,
-        min: 1,
-        'default': 1
-    }
+    'venues_last_updated': Date
 });
 
 UserSchema.pre('save', function(next) {

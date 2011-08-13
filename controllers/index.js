@@ -17,13 +17,13 @@ app.get('/index', function(req, res) {
     res.render('index', {
         layout: false,
         user_id: LocalUtils.getCookie('user_id', req)
-    });    
+    });
 });
 
 app.get('/index_b', function(req, res) {
     res.render('index_b', {
         layout: false
-    });     
+    });
 });
 
 app.get('/login', function(req, res) {
@@ -42,7 +42,6 @@ app.get('/callback', function(req, res) {
             res.send("An error was thrown: " + error.message);
         }
         else {
-            console.log("Pre-Login");
             User.login(accessToken, function(user_id) {
                 console.log("Login");
                 redirectHome(user_id, res);

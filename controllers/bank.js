@@ -20,6 +20,7 @@ app.get('/bank', function(req, res) {
                 console.log("foo", Rank.getRankValue(user.net_worth));
                 data.rank = Rank.getRankValue(user.net_worth);
             }
+	        console.log(user);
             res.render('bank', {
                 user: user,
                 data: data

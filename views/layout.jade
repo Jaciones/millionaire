@@ -2,7 +2,7 @@
 html(lang="en")
    head
       title My Site
-      <meta name="viewport" content="width=device-width, initial-scale=1"> 
+      <meta name="viewport" content="width=device-width, initial-scale=1">
       script(src='http://code.jquery.com/jquery-1.6.1.min.js')
       script(src='http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.js')
       - var js = (typeof javascripts === 'undefined') ? [] : javascripts;
@@ -22,7 +22,7 @@ html(lang="en")
                      div(style="font-family: mill;", class="title") Fourmillionaire
       - var u = user;
       - if (u)
-      center
+      centera
          div(class="info")
             span(class="info1")
                 img(src="#{user.photo_url}", style="width:32px;height:32px; margin: 5px;")
@@ -35,19 +35,19 @@ html(lang="en")
       div(data-role = "navbar", data-position="fixed")
          ul
             li
-               a(href="/home",data-role="button", data-ajax="false", style="font-family: mill;", class="navbar_bottom") 
+               a(href="/home",data-role="button", data-ajax="false", style="font-family: mill;", class="navbar_bottom")
                   img(src="/images/house.png")
                   div Home
             li
-               a(href="/bank",data-role="button", data-ajax="false", style="font-family: mill;", class="navbar_bottom") 
+               a(href="/bank",data-role="button", data-ajax="false", style="font-family: mill;", class="navbar_bottom")
                   img(src="/images/briefcase.png")
                   div Bank
             li
-               a(href="/buy",data-role="button", data-ajax="false", style="font-family: mill;", class="navbar_bottom", data-ajax="false") 
+               a(href="/buy",data-role="button", data-ajax="false", style="font-family: mill;", class="navbar_bottom", data-ajax="false")
                   img(src="/images/piggy.png")
                   div Buy
             li
-               a(href="/friends",data-role="button", data-ajax="false", style="font-family: mill;", class="navbar_bottom") 
+               a(href="/friends",data-role="button", data-ajax="false", style="font-family: mill;", class="navbar_bottom")
                   img(src="/images/world.png")
                   div Friends
 
