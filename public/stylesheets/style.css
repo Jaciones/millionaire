@@ -6,6 +6,12 @@
 body {  }
 
 .center { text-align: center;}
+.paystub { background: #555;
+    border-top : 1px solid #111;
+    border-left : 1px solid #111;
+    border-right : 1px solid #111;
+    padding: 4px 0 4px 0;}
+
 a {color: #00B7FF; vertical-align: middle;}
 img { vertical-align: middle; }
 span {vertical-align: middle;}
@@ -32,11 +38,11 @@ span {vertical-align: middle;}
 .generic_text { padding: 5px 5px 5px 0;}
 .small_user {height: 36px; width :36px;}
 .net_worth { margin-left: 10px; padding: 0px 10px 0 10px; border: 2px solid #7B9344; }
-.info { 
+.info {
    background : #333;
    padding: 2px;
 }
-   
+
 .info1 { color: #ffb80b;}
 .info2 { color: #ffb80b;}
 img {margin-right: 10px;}

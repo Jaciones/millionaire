@@ -22,12 +22,14 @@ div(style="position:relative")
 				div(style="position:absolute; top: 20px; width: 100%;")
 						span(style="color: #fff; font-size: 60px;", class="white_stroke")$#{user.check_amount}
 div(style="paystub")
-	- user.pay_stub.forEach(function(row){
-		div(class="ui-grid-b")
-			div(class="ui-block-a")#{row[0]}
-			div(class="ui-block-b")#{row[1]}
-			div(class="ui-block-c")#{row[2]}
-	-})
+	div(data-role="collapsible", data-theme="a", data-collapsed="true")
+		h1 Pay Stub
+		- user.pay_stub.forEach(function(row){
+			div(class="ui-grid-b paystub")
+				div(class="ui-block-a center")#{row[0]}
+				div(class="ui-block-b center")#{row[1]}
+				div(class="ui-block-c center")$#{row[2]}
+		-})
 
 form(action="/bank/cash_check", method="post", data-ajax="false")
 	input(type="submit", value="Cash Check", data-theme="e")
