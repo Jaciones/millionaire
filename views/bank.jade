@@ -1,34 +1,34 @@
 -if (user.check_amount == 0) {
 center
-    div(class="white_back rounded")
-        br
-        div #{user.first_name + " " + user.last_name}
-        div Net Worth :&nbsp;
-            span(class="rank")#{data.net_worth}
-        div &nbsp;
-        div(class="rank")
-            span Rank:&nbsp;
-            span #{data.rank.title}
-        img(src="#{data.rank.image}", style="margin-left: 12px; margin-bottom: 20px")
-        br
+		div(class="white_back rounded")
+				br
+				div #{user.first_name + " " + user.last_name}
+				div Net Worth :&nbsp;
+						span(class="rank")#{data.net_worth}
+				div &nbsp;
+				div(class="rank")
+						span Rank:&nbsp;
+						span #{data.rank.title}
+				img(src="#{data.rank.image}", style="margin-left: 12px; margin-bottom: 20px")
+				br
 -} else {
 center
-    div(style="font-size:20px; margin: 20px 0 10px 0") Your paycheck has arrived!
+		div(style="font-size:20px; margin: 20px 0 10px 0") Your paycheck has arrived!
 div(style="position:relative")
-    center
-        img(src="/images/check_200x120.png", style="opacity: 0.4")
-        div(style="position:absolute; top: 23px; margin-left: 3px; width: 100%;")
-            span(style="color: #000; font-size: 60px;", class="white_stroke")$#{user.check_amount}
-        div(style="position:absolute; top: 20px; width: 100%;")
-            span(style="color: #fff; font-size: 60px;", class="white_stroke")$#{user.check_amount}
+		center
+				img(src="/images/check_200x120.png", style="opacity: 0.4")
+				div(style="position:absolute; top: 23px; margin-left: 3px; width: 100%;")
+						span(style="color: #000; font-size: 60px;", class="white_stroke")$#{user.check_amount}
+				div(style="position:absolute; top: 20px; width: 100%;")
+						span(style="color: #fff; font-size: 60px;", class="white_stroke")$#{user.check_amount}
 div(style="paystub")
-  - user.pay_stub.forEach(function(row){
-     div(class="ui-grid-b")
-       div(class="ui-block-a")#{row[0]}
-       div(class="ui-block-b")#{row[1]}
-       div(class="ui-block-c")#{row[2]}
-  -})
+	- user.pay_stub.forEach(function(row){
+		div(class="ui-grid-b")
+			div(class="ui-block-a")#{row[0]}
+			div(class="ui-block-b")#{row[1]}
+			div(class="ui-block-c")#{row[2]}
+	-})
 
 form(action="/bank/cash_check", method="post", data-ajax="false")
-   input(type="submit", value="Cash Check", data-theme="e")
+	input(type="submit", value="Cash Check", data-theme="e")
 - }

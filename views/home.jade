@@ -1,41 +1,41 @@
 mixin show_new_user
-    center
-        div(class="ui-body ui-body-e rounded")
-            div Welcome to <b>Fourmillionaire!</b>
-            br
-            div(style="text-align:left;") <b>The goal?</b> <i>It's simple... make more money than you friends.</i>
-            br
-            div(style="text-align:left;") <b>How?</b> <i>Buy properties, buy upgrades, rake is cash!</i>
-            br
-            div(style="text-align:left;") Click the <i>Bank</i> button below to start!
+		center
+				div(class="ui-body ui-body-e rounded")
+						div Welcome to <b>Fourmillionaire!</b>
+						br
+						div(style="text-align:left;") <b>The goal?</b> <i>It's simple... make more money than you friends.</i>
+						br
+						div(style="text-align:left;") <b>How?</b> <i>Buy properties, buy upgrades, rake is cash!</i>
+						br
+						div(style="text-align:left;") Click the <i>Bank</i> button below to start!
 mixin show_just_cashed
-    center
-        div(class="ui-body ui-body-e rounded")
-            div <b>Congratulations!</b>
-            br
-            div(style="text-align:left;") Your real estate empire is ready to grow some more!
-            br
-            div(style="text-align:left;") <b>Buy properties</b> below by clicking the <i>Buy</i> button below.
-            br
-            div(style="text-align:left;") <i>Reminder: You only get 1 check per day, and they expire at the end of the day, so be sure to check in often and cash them!<i>
+		center
+				div(class="ui-body ui-body-e rounded")
+						div <b>Congratulations!</b>
+						br
+						div(style="text-align:left;") Your real estate empire is ready to grow some more!
+						br
+						div(style="text-align:left;") <b>Buy properties</b> below by clicking the <i>Buy</i> button below.
+						br
+						div(style="text-align:left;") <i>Reminder: You only get 1 check per day, and they expire at the end of the day, so be sure to check in often and cash them!<i>
 mixin generic
-    center
-        div(class="ui-body ui-body-e rounded")
-            div <b>Remember!</b>
-            br
-            div(style="text-align:left;") Make sure your friends aren't richer than you, check you bank daily to cash you checks and make sure you buy additions to you properties!
+		center
+				div(class="ui-body ui-body-e rounded")
+						div <b>Remember!</b>
+						br
+						div(style="text-align:left;") Make sure your friends aren't richer than you, check you bank daily to cash you checks and make sure you buy additions to you properties!
 
 
 - if(user.net_worth == 0) {
-    mixin show_new_user
+		mixin show_new_user
 - }else if(just_cashed) {
-    mixin show_just_cashed
+		mixin show_just_cashed
 - }else {
-    mixin generic
+		mixin generic
 - }
 a(href="/bank", data-role="button", data-ajax="false", style="font-family: mill;")
-    span(class="#{bank_notice}")&nbsp;&#9733;&nbsp;
-    span Bank
+		span(class="#{bank_notice}")&nbsp;&#9733;&nbsp;
+		span Bank
 a(href="/portfolio", data-role="button", data-ajax="false", style="font-family: mill;") Portfolio
 a(href="/buy", data-role="button", data-ajax="false", data-ajax="false", style="font-family: mill;") Buy
 a(href="/buy", data-role="button", data-ajax="false", data-ajax="false", style="font-family: mill;") Notifications
