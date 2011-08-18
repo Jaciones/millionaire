@@ -74,6 +74,11 @@ FriendList.prototype.getFriendsAsUsers = function(callback) {
          LocalUtils.throwError(err);
          return;
       }
+
+	  results.sort(function(a,b) {
+		  return b.net_worth - a.net_worth;
+	  });
+
       callback({ users: results});
    });
 };

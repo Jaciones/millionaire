@@ -5,7 +5,7 @@ app.post('/bank/cash_check', function(req, res) {
     User.executeOnUser(user_id, function(user) {
         cashCheck(user, function() {
 	        Notification.sendNotification(user_id, Notification.Types.MESSAGE, "Cashed Check", ["Congratulations on cashing your check!"], function() {
-		        res.redirect("/home?cashed=true");
+		        res.redirect("/friends/display");
 	        });
         });
     });
@@ -18,15 +18,13 @@ app.get('/bank', function(req, res) {
         setCheckAmount(user, function() {
             var data = {};
             if (user.check_amount==0) {
-                data.net_worth = user.formatted_net_worth();
-                console.log("foo", Rank.getRankValue(user.net_worth));
-                data.rank = Rank.getRankValue(user.net_worth);
+	            res.redirect("/friends/display");
+            }else {
+				res.render('bank', {
+					user: user,
+					data: data
+				});
             }
-	        console.log(user);
-            res.render('bank', {
-                user: user,
-                data: data
-            });
         });
     });
 });

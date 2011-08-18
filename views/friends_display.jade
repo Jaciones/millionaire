@@ -1,0 +1,12 @@
+div(class="center")
+	div While you are waiting for you next paycheck, why do you dwell on...
+	div(style="font-size:22px; padding: 5px 0 5px 0") Your Rich Friends!
+	div(class="ui-body ui-body-b rounded", style="text-align: left;")
+		- friends.forEach(function(friend){
+		div(style="margin: 8px 0 7px 0")
+			div
+				img(src="#{friend.photo_url}", class="small_user")
+				div(style="display:inline-block;padding-left: 10px; vertical-align: middle;")
+					div #{friend.first_name + " " + friend.last_name}
+					span(class="net_worth rounded") #{friend.formatted_net_worth()}
+		- })
