@@ -20,9 +20,12 @@ FriendList.updateFriendsForUserAsNecessary = function(user, callback) {
             FriendList.setFriendsForUser(user, function(friendList) {
                callback(friendList);
             });
+         }else {
+	         callback(friendList);
          }
       }
       else {
+	      console.log("!3");
          // No friends list yet, hopefully this never happens
          FriendList.setFriendsForUser(user, function(friendList) {
             callback(friendList);
@@ -53,7 +56,7 @@ FriendList.updateUserAsNecessary = function(friend) {
          user.save(function(error) {
             if (error) {
                LocalUtils.throwError(error);
-            }            
+            }
          });
       }
    });
@@ -61,11 +64,11 @@ FriendList.updateUserAsNecessary = function(friend) {
 
 FriendList.prototype.getFriendsAsUsers = function(callback) {
    var friendIds = [];
-   
+
    this.friends.forEach(function(friend){
       friendIds.push(friend.id); // pushing foursquare id
    });
-   
+
    User.find({ foursquare_id : { $in : friendIds}}, function(err, results) {
       if (err) {
          LocalUtils.throwError(err);

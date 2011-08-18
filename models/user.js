@@ -16,12 +16,10 @@ User.executeOnUserFoursquareId = function(foursquare_id, func) {
     User.findOne({
         'foursquare_id': foursquare_id
     }, function(err, user) {
-        console.log("bakc", user);
         if (err) {
             LocalUtils.throwError(err);
             return;
         }
-        console.log("found", user);
         func(user);
     });
 };
@@ -99,11 +97,9 @@ User.prototype.setCheckAmount = function(callback) {
             _this.check_amount = _this.salary;
 	        paystub.push(["Salary","(daily)", _this.salary]);
             _this.calculateVenueProfits(function(profits, returnedPayStub) {
-	            console.log("PAYSTUBREUTRNED", returnedPayStub)
 	            _this.check_amount += profits;
 				paystub = paystub.concat(returnedPayStub);
 	            _this.pay_stub = paystub;
-	            console.log("PAYSTUBREUTRNED", _this.pay_stub)
                 callback();
             });
         }else {
@@ -164,7 +160,6 @@ User.login = function(accessToken, callback) {
         else {
             foursquare_user = foursquare_user.user;
             var foursquare_id = foursquare_user.id;
-            console.log("Foursquare User", foursquare_user);
 
             User.executeOnUserFoursquareId(foursquare_id, function(user) {
                 console.log("Found user");

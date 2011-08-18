@@ -1,0 +1,44 @@
+div(data-role = "page", data-theme="a", id="mainPage")
+	div(data-role = "header")
+				center
+					div(class="header_box")
+							div(class="sub_head")
+								div(style="font-family: mill;", class="title") Fourmillionaire
+	div(data-role = "content")
+		ul(data-role="listview")
+			- notifications.forEach(function(notification){
+			li
+					a(href="##{notification.id}", id="a_#{notification.id}")
+						-if (!notification.is_read) {
+						span(class="notice")&#9733;&nbsp;
+						-}
+						span #{notification.description}
+			- })
+	div(data-role = "navbar", data-position="fixed")
+		ul
+			li
+				a(href="/home",data-role="button", data-ajax="false", style="font-family: mill;", class="navbar_bottom")
+					img(src="/images/house.png")
+					div Home
+			li
+				a(href="/bank",data-role="button", data-ajax="false", style="font-family: mill;", class="navbar_bottom")
+					img(src="/images/briefcase.png")
+					div Bank
+			li
+				a(href="/buy",data-role="button", data-ajax="false", style="font-family: mill;", class="navbar_bottom", data-ajax="false")
+					img(src="/images/piggy.png")
+					div Buy
+			li
+				a(href="/friends",data-role="button", data-ajax="false", style="font-family: mill;", class="navbar_bottom")
+					img(src="/images/world.png")
+					div Friends
+
+- notifications.forEach(function(notification){
+div(id="#{notification.id}", class="notif", data-role = "page", data-add-back-btn="true")
+	div(data-role = "header")
+		h1 #{notification.description}
+	- if (notification.data.length > 0) {
+	div(data-role = "content", data-theme="a")
+		div #{notification.data[0]}
+	- }
+- });
