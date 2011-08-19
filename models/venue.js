@@ -34,7 +34,6 @@ Venue.getVenuesInfoFromFoursquare = function(venues, access_token, callback) {
 			console.log("returned_count", returned_count.toString());
 			if (returned_count == 0) {
 				setTimeout(function() {
-					console.log("Returning Results");
 					callback(results);
 				}, 1);
 			}
@@ -51,7 +50,7 @@ Venue.calculateVenuesProfits = function(user, purchased_venues, callback) {
 
 	for (var i = 0; i < length; i++) {
 	    var venue = purchased_venues[i];
-		venueMap[venue.id] = venue;
+		venueMap[venue.venue.id] = venue.venue;
 		var venueProfit = Venue.rent(venue);
 	    profits += venueProfit;
 		payStub.push(["Rent", venue.venue.name, venueProfit]);
@@ -63,19 +62,17 @@ Venue.calculateVenuesProfits = function(user, purchased_venues, callback) {
 	        profits += val;
 	    }
 	}
-
+	console.warn("venueMap",venueMap);
 	// Call to get new stats from Foursquare
 	Venue.getVenuesInfoFromFoursquare(purchased_venues, user.access_token, function(data) {
-			console.log("One");
-			console.log("Two");
-			console.log("Three");
-			console.log("-----VENUE", venue.venue);
+		data.forEach(function(venue) {
 			var newVenueStats = venue.venue.stats;
-			var oldVenueStats = venueMap[venue.id].stats;
+			var oldVenueStats = venueMap[venue.venue.id].stats;
 
 			var checkins = newVenueStats.checkinsCount - oldVenueStats.checkinsCount;
-			payStub.push(["New Checkins ($10 x " + checkins.toString() + ")", venue.venue.name, "$"+(10*checkins).toString()]);
+			payStub.push(["New Checkins ($10 x " + checkins.toString() + ")", venue.venue.name, 10*checkins]);
 			profits += 10*checkins;
+		});
 
 		callback(profits, payStub);
 	});
