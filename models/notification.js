@@ -1,7 +1,9 @@
+var LocalUtils = require('../helpers/utils');
+
 Notification.findLatest = function(user_id, limit,  callback) {
     Notification.find({
         'user_id': user_id
-    }).limit(limit).execFind(function(err, notifications) {
+    }).sort('created_at','descending').limit(limit).execFind(function(err, notifications) {
         if (err) {
             LocalUtils.throwError(err);
             return;

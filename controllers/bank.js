@@ -46,6 +46,7 @@ function cashCheck(user, callback) {
 
 function setCheckAmount(user, callback) {
     user.setCheckAmount(function() {
+	    user.purchased_venues = user.purchased_venues.slice(0); // Clone to make sure we copy purchased
         user.save(function(err) {
             if (err) {
                 LocalUtils.throwError(err);

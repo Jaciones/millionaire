@@ -72,6 +72,7 @@ Venue.calculateVenuesProfits = function(user, purchased_venues, callback) {
 			var checkins = newVenueStats.checkinsCount - oldVenueStats.checkinsCount;
 			payStub.push(["New Checkins ($10 x " + checkins.toString() + ")", venue.venue.name, 10*checkins]);
 			profits += 10*checkins;
+			venueMap[venue.venue.id].stats =  venue.venue.stats;
 		});
 
 		callback(profits, payStub);
