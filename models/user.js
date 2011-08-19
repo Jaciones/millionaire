@@ -95,20 +95,23 @@ User.prototype.setCheckAmount = function(callback) {
     if (_this.next_check_issue_date) {
         if (targetTime > _this.next_check_issue_date) {
             _this.check_amount = _this.salary;
-	        paystub.push(["Salary","(daily)", _this.salary]);
-            _this.calculateVenueProfits(function(profits, returnedPayStub) {
-	            _this.check_amount += profits;
-				paystub = paystub.concat(returnedPayStub);
-	            _this.pay_stub = paystub;
-                callback();
-            });
+	        if ( _this.salary > 0) {
+	            paystub.push(["New User Bonus","(daily)", _this.salary]);
+		        _this.salary = _this.salary - 50;
+	        }
+	        Venue.calculateVenuesProfits(_this, _this.purchased_venues, function(profits, returnedPaystub) {
+		        _this.check_amount += profits;
+				paystub = paystub.concat(returnedPaystub);
+		        _this.pay_stub = paystub;
+	            callback();
+	        });
         }else {
 	        callback();
         }
     }
     else {
         _this.check_amount = _this.salary;
-	    Notification.sendNotification(_this.id, Notification.TYPES.MESSAGE, "Welcome to Fourmillionaire. Be sure to check you Notifications for important messages and free prizes!", function() {
+	    Notification.sendNotification(_this.id, Notification.TYPES.MESSAGE, "Welcome to Fourmillionaire!", "Be sure to check you Notifications for important messages and free prizes!", function() {
 		    callback();
 	    });
     }
@@ -128,27 +131,6 @@ User.prototype.getNetWorth = function() {
     }
 
     return newWorth;
-};
-
-User.prototype.calculateVenueProfits = function(callback) {
-    var length = this.purchased_venues.length;
-    var profits = 0;
-	var payStub = [];
-
-    for (var i = 0; i < length; i++) {
-        var venue = this.purchased_venues[i];
-	    var venueProfit = Venue.rent(venue);
-        profits += venueProfit;
-	    payStub.push(["Rent", venue.venue.name, venueProfit]);
-        var multLength = venue.multipliers ? venue.multipliers.length : 0;
-        for (var j = 0; j < multLength; j++) {
-	        var multiplier = MultiplierTypes.findMultiplier(venue.multipliers[j].id);
-	        var val = multiplier.func(venue, this);
-	        payStub.push(["Addition", multiplier.name, val]);
-            profits += val;
-        }
-    }
-    callback(profits, payStub);
 };
 
 User.login = function(accessToken, callback) {

@@ -54,6 +54,7 @@ VenueList.getAllAvailableForUserFromFoursquare = function(access_token, callback
     Foursquare.Users.getVenueHistory('self', null, access_token, function(err, data) {
         if (err) {
             callback(err, null);
+	        return;
         }
         var venues = data.venues.items;
         for (var i = 0; i < venues.length; i++) {
