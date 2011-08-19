@@ -27,3 +27,19 @@ app.get('/n_read/:notification_id', function(req, res) {
 
 	});
 });
+
+app.get('/has_notifications.json', function(req, res) {
+	var user_id = LocalUtils.getCookie('user_id', req);
+	Notification.findLatest(user_id, 10, function(notifications) {
+		var hasNotifications = false;
+
+		notifications.forEach(function(notif) {
+			if (!notif.is_read)	{
+				hasNotifications = true;
+			}
+		});
+
+		res.contentType('json');
+		res.json({ has_notifications: hasNotifications });
+	});
+});
