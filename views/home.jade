@@ -33,7 +33,7 @@ mixin generic
 - }else {
 		mixin generic
 - }
-a(href="/bank", data-role="button", data-ajax="false", style="font-family: mill;")
+a(href="/bank", data-role="button", data-ajax="false", style="font-family: mill;", onclick="$.mobile.pageLoading()")
 		- if (bank_notice) {
 		span(class="notice yellow")&nbsp;&#9733;&nbsp;
 		- }
