@@ -10,7 +10,7 @@ mixin show_active_mults(venue, multipliers)
 mixin show_available_mults(owned_mults)
 		-if (owned_mults.length < 2 && isSelf) {
 		div
-				div(data-role="collapsible", data-theme="a", data-collapsed="true")
+				div(data-role="collapsible", data-theme="a", data-collapsed="false")
 						h1 Buy Enhancements
 						p You can add custom items to your properties. These items can add value to you property and increase you daily paycheck!
 						- multipliers.forEach(function(mult) {
@@ -48,4 +48,8 @@ div(class="ui-body ui-body-b")
 						mixin show_active_mults(venue.venue, v_multipliers)
 						- }
 				mixin show_available_mults(v_multipliers)
+				div
+					a(href="/venue/sell/#{venue.venue.id}", data-rel="dialog", data-role="button", data-icon="back", data-theme="a") Sell Venue ($#{venue.value})
+
+
 

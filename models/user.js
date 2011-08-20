@@ -37,6 +37,24 @@ User.prototype.purchaseVenue = function(venue_id, callback) {
     });
 };
 
+User.prototype.sellVenue = function(venue_id, callback) {
+	var newVenueList = [];
+	var _this = this;
+	var soldVenue = null;
+	_this.purchased_venues.forEach(function(venue) {
+		if (venue.venue.id !== venue_id) {
+			newVenueList.push(venue);
+		}else {
+			_this.bank_balance = _this.bank_balance + venue.value;
+			soldVenue = venue;
+		}
+	});
+	_this.purchased_venues = newVenueList;
+	Notification.sendNotification(_this.id, Notification.Types.MESSAGE, "Sold Venue", ["You sold "+ soldVenue.venue.name + " for $" + soldVenue.value.toString()], function() {
+		callback();
+	});
+};
+
 User.prototype.purchaseMultiplier = function(venue_id, mult_id) {
     // Force purchased venues to be resaved
     this.purchased_venues = this.purchased_venues.filter(function() {

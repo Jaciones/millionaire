@@ -1,4 +1,5 @@
 $("#layout_page").live("pageshow", function(event) {
+	$.mobile.pageLoading(true);
     for(var i=0; i< 21; i++) {
         $(".notice").fadeToggle("slow", "linear");
     }
