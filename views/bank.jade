@@ -25,7 +25,8 @@ div(style="paystub")
 	div(data-role="collapsible", data-theme="a", data-collapsed="true")
 		h1 Pay Stub
 		- user.pay_stub.forEach(function(row){
-			div(class="ui-grid-b paystub", style="font-size:12px;")
+			- var debit_class = row[2] < 0 ? "l_red" : "";
+			div(class="ui-grid-b paystub #{debit_class}", style="font-size:12px;")
 				div(class="ui-block-a center")#{row[0]}
 				div(class="ui-block-b center")#{row[1]}
 				div(class="ui-block-c center")$#{row[2]}

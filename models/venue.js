@@ -62,6 +62,11 @@ Venue.calculateVenuesProfits = function(user, purchased_venues, callback) {
 	        profits += val;
 	    }
 	}
+	if (length > 4) {
+		payStub.push(["Maintenance", "Five or more venues", -100]);
+	    profits += -100;
+	}
+
 	console.warn("venueMap",venueMap);
 	// Call to get new stats from Foursquare
 	Venue.getVenuesInfoFromFoursquare(purchased_venues, user.access_token, function(data) {

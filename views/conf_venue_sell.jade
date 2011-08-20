@@ -1,0 +1,11 @@
+div(data-role="page", id="confirm", data-add-back-btn="true")
+		div(data-role="header", data-position="inline")
+				h1 Sell Venue?
+		div(data-role="content")
+				center
+						h1 Are you sure you want to sell  "#{venue.venue.name}" for $#{venue.value}?
+						form(action="/venue/sell", method="post")
+								input(type="hidden", name="venue_id", value="#{venue.venue.id}")
+								input(type="submit", value="Yes")
+
+						a(href="#", data-role="button", data-rel="back") Cancel
