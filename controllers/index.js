@@ -1,10 +1,13 @@
 var LocalUtils = require('../helpers/utils');
 
 app.get('/', function(req, res) {
-    if (LocalUtils.isMobile(req) || req.params.b) {
+	var location = req.param('loc')
+
+    if (LocalUtils.isMobile(req) || location === "index") {
         res.redirect("/index");
     }else {
-        res.redirect("/index_b");
+		location = location ? "?loc="+location : "";
+        res.redirect("/index_b"+location);
     }
 });
 
@@ -21,8 +24,10 @@ app.get('/index', function(req, res) {
 });
 
 app.get('/index_b', function(req, res) {
+	var location = req.param('loc') || "index?loc=index";
     res.render('index_b', {
-        layout: false
+        layout: false,
+	    loc : location
     });
 });
 
@@ -52,7 +57,7 @@ app.get('/callback', function(req, res) {
 
 function redirectHome(user_id, res) {
     res.cookie('user_id', user_id, {
-        httpOnly: true
+        httpOnly: false
     });
     res.writeHead(303, {
         "location": "/home"

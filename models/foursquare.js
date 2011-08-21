@@ -10,7 +10,7 @@ var	config = {// Localhost
 	"secrets" : {
 		"clientId" : "0TGWQIYUBES4JTALL5SDTF0AKFKBH0DB25QTSILZR2FYHQZ2",
 		"clientSecret" : "GZ2DIL4XVMILJF1PTFIR0PJHAB3E1SOWSX04AVFQNCE1KPTQ",
-		"redirectUrl": "http://localhost:3000/callback"
+		"redirectUrl": "http://www.fourmillionaire.com:3000/callback"
 	}
 };
 

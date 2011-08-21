@@ -42,6 +42,7 @@ require('./controllers/portfolio');
 require('./controllers/index');
 require('./controllers/friends');
 require('./controllers/venue');
+require('./controllers/facebook');
 //app.listen(process.env.C9_PORT);
 app.listen(3000);
 
