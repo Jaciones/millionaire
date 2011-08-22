@@ -1,0 +1,46 @@
+div(data-role = "page", data-theme="a", data-add-back-btn="true")
+	div(data-role = "header")
+				center
+					div(class="header_box")
+							div(class="sub_head")
+								div(style="font-family: mill;", class="title") Fourmillionaire
+
+	div(data-role = "content")
+		a(href="#about", data-role="button", data-ajax="false", style="font-family: mill;") About / Contact
+		a(href="#instructions", data-role="button", data-ajax="false", style="font-family: mill;") Instructions
+		a(href="#thanks", data-role="button", data-ajax="false", style="font-family: mill;") Thanks
+		a(href="/home", data-role="button", data-ajax="false", data-icon="home", style="font-family: mill;") Home
+<!-- About page stuff -->
+div(id="about", data-role = "page", data-add-back-btn="true", data-theme="a")
+	div(data-role = "header")
+		h1 About
+		a(href="#", data-icon="back", data-rel="back") Back
+	div(data-role = "content", class="center")
+		div(style="margin-bottom: 10px;") Have a problem with Fourmillionaire?
+		div(style="margin-bottom: 10px;") Have some feedback or suggestions?
+		div(style="margin-bottom: 10px;") Contact us at Facebook
+		div
+			a(href="http://www.facebook.com/Fourmillionaire", style="color: yellow; font-size: 12px;") http://www.facebook.com/Fourmillionaire
+
+<!-- Instructions -->
+div(id="instructions", data-role = "page", data-add-back-btn="true",  data-theme="a")
+	div(data-role = "header")
+		h1 Instructions
+		a(href="#", data-icon="back", data-rel="back") Back
+	div(data-role = "content")
+		div(style="padding: 5px;")
+			div(style="margin-bottom: 10px;") <span style="font-family: mill;">Prerequisites</span>: You must have a&nbsp;
+				a(href="http://foursquare.com", style="color: yellow")
+					span Foursquare account.
+			div(style="margin-bottom: 10px;") <span style="font-family: mill;">Objective:</span> Make money! Ideally, more money than your friends.
+			div(style="margin: 10px 0 10px 0;") <span style="font-family: mill;">Rules:</span> Every day you can come back here and collect a paycheck. With this paycheck you can buy things that make you more money. First, you need to buy a property, by clicking on the "Buy" button and findind a venue that you can purchase.
+			div(style="margin-bottom: 10px;") <span style="font-family: mill;">Advice:</span> Start out small. Buy a little venue. You make money with every person that checks in, so try to buy one that you or your friends use alot. Once you have your venue, add enhancements to it to collect more money.
+			div Make sure you check in every day! You paychecks do NOT carry over to the next day.
+
+<!-- Thanks -->
+div(id="thanks", data-role = "page", data-add-back-btn="true", data-theme="a")
+	div(data-role = "header")
+		h1 Thanks
+		a(href="#", data-icon="back", data-rel="back") Back
+	div(data-role = "content")
+		div The following resources were used in make Fourmillionaire and here is the thanks for them!

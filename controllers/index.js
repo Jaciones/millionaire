@@ -55,6 +55,7 @@ app.get('/callback', function(req, res) {
     });
 });
 
+
 function redirectHome(user_id, res) {
     res.cookie('user_id', user_id, {
         httpOnly: false

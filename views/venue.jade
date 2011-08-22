@@ -26,7 +26,10 @@ mixin show_available_mults(owned_mults)
 												- if (mult.id==="facebook_shop") {
 														a(href="#{facebookPostUrl}", data-role="button", class="inline_button") Post to Facebook
 												- }else if (mult.id==="twitter_shop") {
-														a(href="#", data-role="button") Post to Twitter
+														div
+														a(href="http://twitter.com/share", data-role="button", class="twitter-share-button", data-url="http://www.fourmillionaire.com", data-text="I'm playing Fourmillionaire!", data-count="none")
+															Tweet
+														script(type="text/javascript", src="http://platform.twitter.com/widgets.js")
 												- }else {
 														form(action="/venue/#{venue.venue.id}/buy_multiplier", method="post", data-ajax="false")
 																input(type="hidden", value="#{mult.id}", name="mult_id")

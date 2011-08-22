@@ -15,3 +15,9 @@ app.get('/home', function(req, res) {
       });
    });
 });
+
+app.get('/boring', function(req, res) {
+    res.render('boring', {
+        layout: "layout_simple"
+    });
+});
