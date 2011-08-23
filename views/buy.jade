@@ -8,7 +8,7 @@ html(lang="en")
 			link(rel='stylesheet', href='http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.css')
 			link(rel='stylesheet', href='/stylesheets/style.css')
 	body
-	div(data-role = "page", id = "foo")
+	div(data-role = "page", id = "foo", data-theme="a")
 		div(data-role = "header")
 					center
 						div(class="header_box")
@@ -27,7 +27,7 @@ html(lang="en")
 									#{venue.venue.name}
 					- })
 
-		div(data-role = "navbar", data-position="whole-screen", data-theme="a")
+		div(data-role = "navbar")
 			ul
 					li
 						a(href="/home",data-role="button", data-ajax="false", style="font-family: mill;", class="navbar_bottom")
@@ -50,7 +50,16 @@ html(lang="en")
 	div(id="#{venue.venue.id}", data-role = "page",data-add-back-btn="true")
 			div(data-role = "header")
 				h1 #{venue.venue.name}
+			div(class="ui-body-a center")
+				div(class="info")
+						span(class="info1")
+								img(src="#{user.photo_url}", style="width:32px;height:32px; margin: 5px;")
+						span(class="divider")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						span(class="info2") Balance:&nbsp;
+						span(class="green")$#{user.bank_balance}
+
 			div(data-role = "content")
+				div(class="center")
 				div(class="ui-body ui-body-b")
 						center
 							div(class="green", style="font-size: 24px; font-weight: bold") $#{venue.value}

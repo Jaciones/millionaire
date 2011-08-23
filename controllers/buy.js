@@ -6,16 +6,17 @@ app.get('/buy', function(req, res) {
     VenueList.getOrCreateVenueListForUser(user_id, function(venueList) {
         User.executeOnUser(user_id, function(user) {
             var availableVenues = [];
-            
+
             venueList.data.forEach(function(venue) {
                 if (!user.findVenueInPurchased(venue.venue.id)) {
                     availableVenues.push(venue);
                 }
             });
-            
+
             res.render('buy', {
                 layout: false,
-                venues: availableVenues
+                venues: availableVenues,
+	            user: user
             });
         });
     });

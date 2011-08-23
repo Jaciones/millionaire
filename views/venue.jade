@@ -26,7 +26,7 @@ mixin show_available_mults(owned_mults)
 												- if (mult.id==="facebook_shop") {
 														a(href="#{facebookPostUrl}", data-role="button", class="inline_button") Post to Facebook
 												- }else if (mult.id==="twitter_shop") {
-														div
+														div(style="padding-bottom: 10px;")
 																input(type="hidden", value="#{venue.venue.id}", name="venue_id", id="venue_id")
 														a(href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fwww.fourmillionaire.com&text=Come%20play%20Fourmillionaire%20with%20me!", class="twitter-share-button", data-url="http://www.fourmillionaire.com", data-text="I'm playing Fourmillionaire!", data-count="none")
 															Tweet
