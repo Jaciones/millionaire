@@ -24,7 +24,6 @@ app.get('/venue_friend/:friend_id/venue/:venue_id', function(req, res) {
     var user_id = req.params.friend_id;
     var venue_id = req.params.venue_id;
     var multipliers = MultiplierTypes.getAvailable();
-
     User.executeOnUser(user_id, function(user) {
         var venue = user.findVenueInPurchased(venue_id);
         res.render('venue', {
@@ -35,7 +34,6 @@ app.get('/venue_friend/:friend_id/venue/:venue_id', function(req, res) {
         });
     });
 });
-
 
 
 app.get('/venue/delete/:venue_id/mult/:mult_type', function(req, res) {
@@ -60,6 +58,26 @@ app.get('/venue/sell/:venue_id', function(req, res) {
 			layout: "layout_simple",
 			venue: venue
 		});
+	});
+});
+
+app.post('/venue/tweeted', function(req, res) {
+	var user_id = LocalUtils.getCookie('user_id', req);
+	console.warn(req.params);
+	console.warn(req.body);
+
+    var venue_id = req.body.venue_id;
+
+	User.executeOnUser(user_id, function(user) {
+		user.purchaseMultiplier(venue_id, "twitter_shop");
+		user.save(function(err) {
+		    if (err) {
+		        LocalUtils.throwError(err);
+		        return;
+		    }
+			res.json({ venue_id: venue_id });
+		});
+
 	});
 });
 
@@ -114,7 +132,8 @@ app.get('/venue/:user_id/:venue_id', function(req, res) {
             venue: venue,
             facebookPostUrl: facebookPostUrl,
             multipliers: multipliers,
-            isSelf: isSelf
+            isSelf: isSelf,
+	        javascripts : ["/javascripts/tweet.js?" + appId]
         });
     });
 });

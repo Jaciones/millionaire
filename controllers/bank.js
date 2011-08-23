@@ -4,9 +4,7 @@ app.post('/bank/cash_check', function(req, res) {
     var user_id = LocalUtils.getCookie('user_id', req);
     User.executeOnUser(user_id, function(user) {
         cashCheck(user, function() {
-	        Notification.sendNotification(user_id, Notification.Types.MESSAGE, "Cashed Check", ["Congratulations on cashing your check!"], function() {
-		        res.redirect("/friends/display");
-	        });
+			res.redirect("/friends/display");
         });
     });
 });

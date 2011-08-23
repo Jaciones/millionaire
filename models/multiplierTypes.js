@@ -3,7 +3,7 @@ MultiplierTypes = {
         id: 'house0',
         name: 'Beginner House',
         desc: 'This fixer-upper is the perfect spot to begin for the aspiring real estate mogul',
-        mini_desc: '+ 5% to rent',
+        mini_desc: '+ 15% to rent',
         photo: '/images/mults/house0',
         cost: 100,
         func: function(venue, user) {
@@ -13,7 +13,7 @@ MultiplierTypes = {
         id: 'house1',
         name: 'Small House',
         desc: 'A small house is better than no house at all, right?',
-        mini_desc: '+ 10% to rent',
+        mini_desc: '+ 20% to rent',
         photo: '/images/mults/house1',
         cost: 200,
         func: function(venue, user) {
@@ -23,7 +23,7 @@ MultiplierTypes = {
         id: 'house2',
         name: 'Decent House',
         desc: 'This is a home any working class owner would be proud to call their own.',
-        mini_desc: '+ 15% to rent',
+        mini_desc: '+ 25% to rent',
         photo: '/images/mults/house2',
         cost: 500,
         func: function(venue, user) {
@@ -33,7 +33,7 @@ MultiplierTypes = {
         id: 'house4',
         name: 'Nice House',
         desc: 'This house shows your friends that you are really working your way up in the world!',
-        mini_desc: '+ 20% to rent',
+        mini_desc: '+ 50% to rent',
         photo: '/images/mults/mansion',
         cost: 10000,
         func: function(venue, user) {
@@ -44,21 +44,21 @@ MultiplierTypes = {
         id: 'facebook_shop',
         name: 'Facebook Shop',
         desc: 'Show your friends how wealthy you are becoming by sharing you success on Facebook. This house is free with a wall-post to Facebook',
-        mini_desc: '+ 15% to rent',
+        mini_desc: '+ $30 to rent',
         photo: '/images/mults/facebook',
         cost: 0,
         func: function(venue, user) {
-            return Venue.rent(venue) * 0.15;
+            return 50;
         }
     }, {
         id: 'twitter_shop',
         name: 'Twitter Shop',
         desc: 'Show your friends how wealthy you are becoming by sharing you success on Twitter. This house is free with a tweet on Twitter',
-        mini_desc: '+ 15% to rent',
+        mini_desc: '+ $30 to rent',
         photo: '/images/mults/twitter',
         cost: 0,
         func: function(venue, user) {
-            return Venue.rent(venue) * 0.15;
+            return 50;
         }
     }, {
         id: 'shop0',
@@ -74,11 +74,11 @@ MultiplierTypes = {
         id: 'shop1',
         name: 'Shop',
         desc: 'People have been hearing about your success as a business man.',
-        mini_desc: '+ $450 to rent',
+        mini_desc: '+ $400 to rent',
         photo: '/images/mults/record_store',
         cost: 2000,
         func: function(venue, user) {
-            return 450;
+            return 400;
         }
     }, {
         id: 'shop2',
@@ -86,7 +86,7 @@ MultiplierTypes = {
         desc: 'People have been hearing about your success as a business man.',
         mini_desc: '+ $1000 to rent',
         photo: '/images/mults/pharmacy',
-        cost: 4000,
+        cost: 6000,
         func: function(venue, user) {
             return 1000;
         }
@@ -96,9 +96,9 @@ MultiplierTypes = {
         desc: 'Your wealth is growing and it\'s about time to expand',
         mini_desc: '+ $2000 to rent',
         photo: '/images/mults/large_business',
-        cost: 8000,
+        cost: 12000,
         func: function(venue, user) {
-            return 1000;
+            return 2000;
         }
     }],
     all: function() {

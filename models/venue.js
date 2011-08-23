@@ -63,8 +63,8 @@ Venue.calculateVenuesProfits = function(user, purchased_venues, callback) {
 	    }
 	}
 	if (length > 4) {
-		payStub.push(["Maintenance", "Five or more venues", -100]);
-	    profits += -100;
+		payStub.push(["Maintenance", "Five or more venues", -(profits * 0.20)]);
+	    profits -= (profits * 0.20)
 	}
 
 	console.warn("venueMap",venueMap);
