@@ -73,9 +73,8 @@ User.prototype.purchaseMultiplier = function(venue_id, mult_id) {
 };
 
 User.prototype.formatted_net_worth = function() {
-    if (!this.net_worth) return "$0.00";
-
-    return "$" + parseFloat(this.net_worth).toString();
+    if (!this.net_worth) return "$0";
+    return LocalUtils.formatToCurrency(this.net_worth);
 };
 
 User.prototype.findVenue = function(venue_id, callback) {

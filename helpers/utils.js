@@ -12,11 +12,11 @@ function LocalUtils() {
             throw error;
         }
     };
-    
+
     this.isMobile = function(req) {
         var ua = req.headers['user-agent'];
-        
-        if (/mobile/i.test(ua)) 
+
+        if (/mobile/i.test(ua))
             return true;
 
         if (/iPhone/.test(ua) ||  /iPad/.test(ua))
@@ -25,5 +25,18 @@ function LocalUtils() {
         if (/Android/.test(ua))
             return true;
     };
+
+	this.formatToCurrency = function(val) {
+		var stringVal = val.toString().split("");
+		var length = stringVal.length;
+		var commas_count = Math.floor((length - 1) / 3);
+
+		for(var i = 1; i <= commas_count; i++) {
+			stringVal.splice(length - (i *3), 0, ",");
+		}
+		return "$" + stringVal.join("");
+	};
+
+
 }
 exports = module.exports = new LocalUtils();
