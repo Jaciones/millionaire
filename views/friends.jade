@@ -2,9 +2,9 @@ ul(data-role="listview")
 	- friends.forEach(function(friend){
 	li
 			a(href="/portfolio_friends/#{friend.foursquare_id}")
-				div(class="")
-						img(src="#{friend.photo_url}", class="small_user")
-						div(style="display:inline-block;padding-left: 10px; vertical-align: middle;")
-							div #{friend.first_name + " " + friend.last_name}
+					img(src="#{friend.photo_url}")
+					div(style="display:inline-block;padding-left: 10px; vertical-align: middle;")
+						div #{friend.first_name + " " + friend.last_name}
+						div(style="text-align: left;", style="margin-top: 5px;")
 							span(class="net_worth rounded") #{friend.formatted_net_worth()}
 	- })

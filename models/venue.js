@@ -25,7 +25,7 @@ Venue.getVenuesInfoFromFoursquare = function(venues, access_token, callback) {
 		callback([]);
 		return;
 	}
-	
+
 	for(var i=0; i< venues.length; i++) {
 		var venue = venues[i].venue;
 		// Venue ids are the Foursquare Ids
@@ -80,6 +80,9 @@ Venue.calculateVenuesProfits = function(user, purchased_venues, callback) {
 			var oldVenueStats = venueMap[venue.venue.id].stats;
 
 			var checkins = newVenueStats.checkinsCount - oldVenueStats.checkinsCount;
+			if (checkins < 0) { // Sometimes checkin diff is NEGATIVE from Foursquare!
+				checkins = 0;
+			}
 			payStub.push(["New Checkins ($20 x " + checkins.toString() + ")", venue.venue.name, 20*checkins]);
 			profits += 20*checkins;
 			venueMap[venue.venue.id].stats =  venue.venue.stats;

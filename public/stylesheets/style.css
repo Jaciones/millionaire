@@ -40,7 +40,7 @@ span {vertical-align: middle;}
 .green_border { border: 3px solid #7B9344; padding: 5px 10px 5px 10px; -moz-border-radius: 1em; -webkit-border-radius: 1em; border-radius: 1em;}
 .generic_text { padding: 5px 5px 5px 0;}
 .small_user {height: 36px; width :36px;}
-.net_worth { margin-left: 10px; padding: 0px 10px 0 10px; border: 2px solid #7B9344; }
+.net_worth { padding: 0px 10px 0 10px; border: 2px solid #7B9344; }
 .info {
    background : #333;
    padding: 2px;

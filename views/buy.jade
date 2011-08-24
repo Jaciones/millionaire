@@ -17,22 +17,30 @@ html(lang="en")
 
 		div(data-role = "content")
 			ul(data-role="listview")
-					- venues.forEach(function(venue){
-					li
-						- if (!friends_venues[venue.venue.id]) {
-							a(href="##{venue.venue.id}")
-								img(src="#{venue.venue.categories[0].icon}", class="ui-li-icon", style="height:16px;width:16px;")
-								span(class="green")
-									$#{venue.value}&nbsp;
-								span
-									#{venue.venue.name}
-						- } else {
-								img(src="#{friends_venues[venue.venue.id].photo_url}")
-								div
-									#{venue.venue.name}
-								div(class="grey") <i>(Owned by #{friends_venues[venue.venue.id].first_name})</i>
-						- }
-					- })
+					- if (venues && venues.length > 0) {
+						- venues.forEach(function(venue){
+						li
+							- if (!friends_venues[venue.venue.id]) {
+								a(href="##{venue.venue.id}")
+									img(src="#{venue.venue.categories[0].icon}", class="ui-li-icon", style="height:16px;width:16px;")
+									span(class="green")
+										$#{venue.value}&nbsp;
+									span
+										#{venue.venue.name}
+							- } else {
+									img(src="#{friends_venues[venue.venue.id].photo_url}")
+									div
+										#{venue.venue.name}
+									div(class="grey", style="width: 170px;") <i>(Owned by #{friends_venues[venue.venue.id].first_name})</i>
+							- }
+						- })
+					-} else {
+						div(class="ui-body ui-body-e rounded", style="margin: 10px;")
+							p <b>What?! No place to buy!</b>
+							p You need to start using Foursquare to check into places that you go to.
+							p Try checking in the next time you go to a restaurant or store! It's fun!
+							p Once you do, it may take a day or so for them to show up here...
+					- }
 
 		div(data-role = "navbar")
 			ul

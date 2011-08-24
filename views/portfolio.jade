@@ -1,21 +1,30 @@
 -if (venues.length > 2) {
-div(style="height: 80px;") Info: Having 5 or more venues will incur a <b class="yellow">20%</b> maintenance fee.
+div(style="height: 70px;") Info: Having 5 or more venues will incur a <b class="yellow">20%</b> maintenance fee.
 - }
 ul(data-role="listview")
-	- venues.forEach(function(venue){
-	li(data-iconsize="44")
-		a(href="/venue/#{user.id}/#{venue.venue.id}",data-ajax="false" )
-			div(style="width:200px;")
-					div(class="fs_icon_holder_sm")
-						img(src="#{venue.venue.categories[0].icon}", class="dropshadow_white")
-					div(style="display:inline-block;padding: 0 0 0 10px; position: relative; vertical-align: middle; line-height: 30px")
-							div
-									span(style="font-family: mill;") #{venue.venue.name}
-											br
-									span(class="portfolio_badge rounded") +$#{venue.value / 10}
-									- var multipliers = venue.multipliers || [];
-									- multipliers.forEach(function(mult){
-									span(style="padding-left: 10px")
-											img(src='#{mult.photo + "_32x32.png"}', class="small_photo")
-									- })
+	-if (venues && venues.length > 0) {
+		- venues.forEach(function(venue){
+		li
+			a(href="/venue/#{user.id}/#{venue.venue.id}",data-ajax="false" )
+				div(style="overflow:hidden; width:255px;")
+						div(class="fs_icon_holder_sm")
+							img(src="#{venue.venue.categories[0].icon}", class="dropshadow_white")
+						div(style="display:inline-block;padding: 0 0 0 10px; position: relative; vertical-align: middle; line-height: 30px")
+								div
+										span(style="font-family: mill") #{venue.venue.name}
+												br
+										span(class="portfolio_badge rounded") +$#{venue.value / 10}
+										- var multipliers = venue.multipliers || [];
+										- multipliers.forEach(function(mult){
+										span(style="padding-left: 10px")
+												img(src='#{mult.photo + "_32x32.png"}', class="small_photo")
+										- })
 		- })
+	-} else {
+		div(class="ui-body ui-body-e rounded", style="margin: 10px;")
+			p <b>No Venues?!</b>
+			p OK. Here's what you do...
+			p Go to the "Bank" and cash your check, then press the "Buy" button and buy a property
+			p Once you do, come back here and you can add stuff too it! It will be fun, trust me...
+
+	-}
