@@ -115,6 +115,7 @@ User.prototype.setCheckAmount = function(callback) {
 	            paystub.push(["New User Bonus","(daily)", _this.salary]);
 		        _this.salary = _this.salary - 50;
 	        }
+	        console.warn("calculatingVenuesProfits");
 	        Venue.calculateVenuesProfits(_this, _this.purchased_venues, function(profits, returnedPaystub) {
 		        _this.check_amount += profits;
 				paystub = paystub.concat(returnedPaystub);

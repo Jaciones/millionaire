@@ -21,6 +21,11 @@ Venue.rent = function(venue) {
 Venue.getVenuesInfoFromFoursquare = function(venues, access_token, callback) {
 	var returned_count = venues.length;
 	var results = [];
+	if (venues.length === 0) {
+		callback([]);
+		return;
+	}
+	
 	for(var i=0; i< venues.length; i++) {
 		var venue = venues[i].venue;
 		// Venue ids are the Foursquare Ids

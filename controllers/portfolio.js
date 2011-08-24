@@ -12,7 +12,7 @@ app.get('/portfolio', function(req, res) {
 app.get('/portfolio_friends/:friend_foursqure_id', function(req, res) {
     var foursquare_id = req.params.friend_foursqure_id;
     User.executeOnUserFoursquareId(foursquare_id, function(user) {
-        res.render('portfolio', {
+        res.render('portfolio_of_friends', {
             user: user,
             venues: user.purchased_venues
         });
