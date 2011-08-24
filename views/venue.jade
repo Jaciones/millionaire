@@ -17,7 +17,7 @@ mixin show_available_mults(owned_mults)
 						div(data-role="collapsible", data-collapsed="true")
 								h3
 										img(src='#{mult.photo + "_32x32.png"}', class="small_photo")
-										#{mult.name} ($#{mult.cost})
+										span(style="font-size: 12px;") #{mult.name} ($#{mult.cost})
 								div
 										img(src='#{mult.photo + "_64x64.png"}', class="big_photo")
 										span(class="green_border rounded")

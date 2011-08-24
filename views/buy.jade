@@ -18,13 +18,20 @@ html(lang="en")
 		div(data-role = "content")
 			ul(data-role="listview")
 					- venues.forEach(function(venue){
-					li(data-iconsize="44")
-						a(href="##{venue.venue.id}")
+					li
+						- if (!friends_venues[venue.venue.id]) {
+							a(href="##{venue.venue.id}")
 								img(src="#{venue.venue.categories[0].icon}", class="ui-li-icon", style="height:16px;width:16px;")
 								span(class="green")
 									$#{venue.value}&nbsp;
 								span
 									#{venue.venue.name}
+						- } else {
+								img(src="#{friends_venues[venue.venue.id].photo_url}")
+								div
+									#{venue.venue.name}
+								div(class="grey") <i>(Owned by #{friends_venues[venue.venue.id].first_name})</i>
+						- }
 					- })
 
 		div(data-role = "navbar")

@@ -120,6 +120,10 @@ User.prototype.setCheckAmount = function(callback) {
 		        _this.check_amount += profits;
 				paystub = paystub.concat(returnedPaystub);
 		        _this.pay_stub = paystub;
+		        if (_this.check_amount == 0) {
+			        _this.pay_stub.push(["Panhandler Bonus","(daily)", 50]);
+			        _this.check_amount += 50;
+		        }
 	            callback();
 	        });
         }else {

@@ -6,6 +6,7 @@ app.get('/buy', function(req, res) {
     VenueList.getOrCreateVenueListForUser(user_id, function(venueList) {
         User.executeOnUser(user_id, function(user) {
             var availableVenues = [];
+			var friendsVenues = {};
 
             venueList.data.forEach(function(venue) {
                 if (!user.findVenueInPurchased(venue.venue.id)) {
@@ -13,11 +14,20 @@ app.get('/buy', function(req, res) {
                 }
             });
 
-            res.render('buy', {
-                layout: false,
-                venues: availableVenues,
-	            user: user
-            });
+	        FriendList.getFriendsAsUsers(user_id, function(users) {
+		        users.forEach(function(friend_as_user) {
+					friend_as_user.purchased_venues.forEach(function(friend_venue) {
+						friendsVenues[friend_venue.venue.id] = friend_as_user;
+					});
+		        });
+
+		        res.render('buy', {
+		            layout: false,
+		            venues: availableVenues,
+			        friends_venues : friendsVenues,
+			        user: user
+		        });
+	        });
         });
     });
 

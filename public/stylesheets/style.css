@@ -12,6 +12,7 @@ body {  }
     border-right : 1px solid #111;
     padding: 4px 0 4px 0;}
 
+.user_photo {width:32px; height:32px; margin: 5px;}
 a {color: #00B7FF; vertical-align: middle;}
 img { vertical-align: middle; }
 span {vertical-align: middle;}

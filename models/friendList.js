@@ -62,6 +62,14 @@ FriendList.updateUserAsNecessary = function(friend) {
    });
 };
 
+FriendList.getFriendsAsUsers = function(user_id, callback) {
+	FriendList.executeOnFriendList(user_id, function(friend_list) {
+		friend_list.getFriendsAsUsers(function(results) {
+			callback(results.users);
+		});
+	});
+};
+
 FriendList.prototype.getFriendsAsUsers = function(callback) {
    var friendIds = [];
 
