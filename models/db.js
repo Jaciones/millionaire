@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-mongoose.connect("mongodb:jaciones:ha7141@dbh23.mongolab.com:27237/jaciones");
+mongoose.connect("#");
 var Schema = mongoose.Schema;
 
 function validatePresenceOf(value) {
